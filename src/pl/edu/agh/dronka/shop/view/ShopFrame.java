@@ -2,6 +2,8 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,6 +19,8 @@ public class ShopFrame extends JFrame {
 	private static final String ITEM_PANEL = "Item Panel";
 	
 	private static final String INDEX_PANEL = "Index Panel";
+
+	private static final String CART_PANEL = "Cart Panel";
 	
 	
 	private CardLayout mainPanelLayout;
@@ -30,6 +34,8 @@ public class ShopFrame extends JFrame {
 	private IndexPanel indexPanel;
 
 	private ShopController shopController;
+
+	private CartPanel cartPanel;
  
 	public ShopFrame(ShopController shopController) {
 		
@@ -39,7 +45,24 @@ public class ShopFrame extends JFrame {
 		createVisuals();
 		
 		setTitle("Dronka Shop");
-		setSize(500, 300);
+		setSize(700, 300);
+	}
+	
+	public void displayItem(Item item) {
+		displayPanel(ITEM_PANEL);
+		itemPanel.setItem(item);
+	}
+
+	public void displayIndex() {
+		displayPanel(INDEX_PANEL);
+	}
+	
+	public CartPanel getCartPanel() {
+		return cartPanel;
+	}
+	
+	public IndexPanel getIndexPanel() {
+		return indexPanel;
 	}
 	
 	private void createVisuals() {
@@ -65,6 +88,14 @@ public class ShopFrame extends JFrame {
 		JButton cartButton = new JButton("Cart");
 		cartPanel.add(cartButton, BorderLayout.LINE_END);
 		
+		cartButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				displayPanel(CART_PANEL);
+			}
+		});
+		
 		return cartPanel;
 		
 	}
@@ -76,21 +107,21 @@ public class ShopFrame extends JFrame {
 		
 		itemPanel = new ItemPanel(shopController);
 		indexPanel = new IndexPanel(shopController);
+		cartPanel = new CartPanel(shopController);
 		
 		mainPanel.add(itemPanel, ITEM_PANEL);
 		mainPanel.add(indexPanel, INDEX_PANEL);
+		mainPanel.add(cartPanel, CART_PANEL);
 		
 		mainPanelLayout.show(mainPanel, INDEX_PANEL);
 		
 		return mainPanel;
 	}
 
-	public void displayItem(Item item) {
-		mainPanelLayout.show(mainPanel, ITEM_PANEL);
-		itemPanel.setItem(item);
+	
+	
+	private void displayPanel(String panelId) {
+		mainPanelLayout.show(mainPanel, panelId);
 	}
 
-	public void displayIndex() {
-		mainPanelLayout.show(mainPanel, INDEX_PANEL);
-	}
 }

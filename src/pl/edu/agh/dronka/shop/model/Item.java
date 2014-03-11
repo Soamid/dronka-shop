@@ -6,9 +6,12 @@ public class Item {
 	
 	private Category category;
 	
-	public Item(String name, Category category) {
+	private int price;
+	
+	public Item(String name, Category category, int price) {
 		this.name = name;
 		this.category = category;
+		this.price = price;
 	}
 
 	public String getName() {
@@ -17,6 +20,10 @@ public class Item {
 	
 	public Category getCategory() {
 		return category;
+	}
+	
+	public int getPrice() {
+		return price;
 	}
 	
 	@Override

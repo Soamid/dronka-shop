@@ -2,10 +2,10 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -20,6 +20,8 @@ public class ItemPanel extends JPanel {
 	private JPanel infoPanel;
 	private ShopController shopController;
 
+	private Item currentItem;
+
 	public ItemPanel(ShopController shopController) {
 		this.shopController = shopController;
 		createVisuals();
@@ -28,6 +30,7 @@ public class ItemPanel extends JPanel {
 	
 	public void setItem(Item item) {
 		infoPanel.removeAll();
+		this.currentItem = item;
 		createInfoLabel("Name", item.getName());
 		createInfoLabel("Category", item.getCategory().toString());
 	}
@@ -60,19 +63,30 @@ public class ItemPanel extends JPanel {
 				shopController.goToIndex();
 			}
 		});
+		
+		addToCartButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				shopController.addToCart(currentItem);
+			}
+		});
 
 		return buttonsPanel;
 	}
 
 	private JPanel createInfoPanel() {
 		JPanel infoPanel = new JPanel();
-		infoPanel.setLayout(new GridLayout(0, 2, 40, 5));
+		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
 		
 		return infoPanel;
 	}
 	
 	private void createInfoLabel(String name, String value) {
-		infoPanel.add(new JLabel(name + ":"));
-		infoPanel.add(new JLabel(value));
+		JPanel infoLabelPanel = new JPanel(new BorderLayout(10, 2));
+		infoLabelPanel.add(new JLabel(name + ":"), BorderLayout.LINE_START);
+		infoLabelPanel.add(new JLabel(value), BorderLayout.CENTER);
+		
+		infoPanel.add(infoLabelPanel);
 	}
 }

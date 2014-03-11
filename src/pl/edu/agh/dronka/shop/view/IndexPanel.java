@@ -8,13 +8,13 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Category;
+import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 
 public class IndexPanel extends JPanel {
 
 	private static final long serialVersionUID = -4871875393346906351L;
-	
+
 	private JList<Item> itemsList;
 	private ShopController shopController;
 
@@ -23,11 +23,13 @@ public class IndexPanel extends JPanel {
 		createVisuals();
 	}
 
+	public void setItems(Index itemsIndex) {
+		itemsList.setListData(itemsIndex.getItems().toArray(new Item[0]));
+	}
+
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 		itemsList = new JList<>();
-		itemsList.setListData(new Item[] { new Item("Proteiny", Category.FOOD),
-				new Item("Hannibal", Category.BOOKS) });
 
 		add(itemsList, BorderLayout.CENTER);
 
