@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
+import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 
 public class ItemPanel extends JPanel {
@@ -22,27 +23,35 @@ public class ItemPanel extends JPanel {
 
 	private Item currentItem;
 
+	private JButton addToCartButton;
+
+	private Index index;
+
 	public ItemPanel(ShopController shopController) {
 		this.shopController = shopController;
 		createVisuals();
 	}
 
-	
 	public void setItem(Item item) {
 		infoPanel.removeAll();
 		this.currentItem = item;
-		createInfoLabel("Name", item.getName());
-		createInfoLabel("Category", item.getCategory().toString());
+		createInfoLabel("Nazwa", item.getName());
+		createInfoLabel("Kategoria", index.getCategoryName(item.getCategory()));
+		createInfoLabel("Iloœæ", Integer.toString(item.getQuantity()));
+		addToCartButton.setEnabled(item.getQuantity() > 0);
 	}
 	
-	
+	public void setIndex(Index index) {
+		this.index = index;
+	}
+
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 
 		JPanel outerInfoPanel = new JPanel();
-		infoPanel = createInfoPanel(); 
+		infoPanel = createInfoPanel();
 		outerInfoPanel.add(infoPanel);
-		
+
 		add(outerInfoPanel, BorderLayout.LINE_START);
 		add(createButtonsPanel(), BorderLayout.PAGE_END);
 	}
@@ -50,22 +59,22 @@ public class ItemPanel extends JPanel {
 	private Component createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 
-		JButton backButton = new JButton("Back");
-		JButton addToCartButton = new JButton("Add to cart");
+		JButton backButton = new JButton("Powrót");
+		addToCartButton = new JButton("Dodaj do koszyka");
 
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(addToCartButton);
-		
+
 		backButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				shopController.goToIndex();
 			}
 		});
-		
+
 		addToCartButton.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				shopController.addToCart(currentItem);
@@ -78,15 +87,15 @@ public class ItemPanel extends JPanel {
 	private JPanel createInfoPanel() {
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(new BoxLayout(infoPanel, BoxLayout.Y_AXIS));
-		
+
 		return infoPanel;
 	}
-	
+
 	private void createInfoLabel(String name, String value) {
 		JPanel infoLabelPanel = new JPanel(new BorderLayout(10, 2));
 		infoLabelPanel.add(new JLabel(name + ":"), BorderLayout.LINE_START);
 		infoLabelPanel.add(new JLabel(value), BorderLayout.CENTER);
-		
+
 		infoPanel.add(infoLabelPanel);
 	}
 }

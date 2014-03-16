@@ -8,10 +8,13 @@ public class Item {
 	
 	private int price;
 	
-	public Item(String name, Category category, int price) {
+	private int quantity;
+	
+	public Item(String name, Category category, int price, int quantity) {
 		this.name = name;
 		this.category = category;
 		this.price = price;
+		this.quantity = quantity;
 	}
 
 	public String getName() {
@@ -24,6 +27,10 @@ public class Item {
 	
 	public int getPrice() {
 		return price;
+	}
+	
+	public int getQuantity() {
+		return quantity;
 	}
 	
 	@Override

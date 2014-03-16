@@ -1,13 +1,16 @@
 package pl.edu.agh.dronka.shop.view.util;
 
 public class CheckBoxNode {
-	String text;
+	private String text;
 
-	boolean selected;
+	private boolean selected;
 
-	public CheckBoxNode(String text, boolean selected) {
+	private Object data;
+
+	public CheckBoxNode(String text, Object data,  boolean selected) {
 		this.text = text;
 		this.selected = selected;
+		this.data =data;
 	}
 
 	public boolean isSelected() {
@@ -24,6 +27,10 @@ public class CheckBoxNode {
 
 	public void setText(String newValue) {
 		text = newValue;
+	}
+	
+	public Object getData() {
+		return data;
 	}
 
 	public String toString() {

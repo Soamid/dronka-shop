@@ -21,12 +21,14 @@ public class CartPanel extends JPanel {
 	private static final long serialVersionUID = 1619310843639460294L;
 
 	private ShopController shopController;
-	private JLabel userValueLabel;
+	private JLabel summaryValueLabel;
 	private JTable cartTable;
 
 	private List<Item> cartItems = new ArrayList<>();
 
 	private CartTableModel cartTableModel;
+
+	private JLabel userValueLabel;
 
 	public CartPanel(ShopController shopController) {
 		this.shopController = shopController;
@@ -40,24 +42,34 @@ public class CartPanel extends JPanel {
 	public void addItem(Item item) {
 		cartItems.add(item);
 		cartTableModel.fireTableDataChanged();
+		refreshSummary();
 	}
+
 
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 		JPanel userPanel = createUserPanel();
 		cartTable = createItemsCartPanel();
 		JPanel buttonsPanel = createButtonsPanel();
+		JPanel summaryPanel =  createSummaryPanel();
 
 		add(userPanel, BorderLayout.PAGE_START);
-		add(cartTable, BorderLayout.CENTER);
+		
+		JPanel itemsPanel = new JPanel();
+		itemsPanel.setLayout(new BorderLayout());
+		
+		itemsPanel.add(cartTable, BorderLayout.CENTER);
+		itemsPanel.add(summaryPanel, BorderLayout.PAGE_END);
+		
+		add(itemsPanel, BorderLayout.CENTER);
 		add(buttonsPanel, BorderLayout.PAGE_END);
 	}
 
 	private JPanel createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 
-		JButton backButton = new JButton("Back");
-		JButton buyButton = new JButton("Buy!");
+		JButton backButton = new JButton("Powrót");
+		JButton buyButton = new JButton("Kup!");
 
 		buttonsPanel.add(backButton);
 		buttonsPanel.add(buyButton);
@@ -84,18 +96,36 @@ public class CartPanel extends JPanel {
 
 	private JPanel createUserPanel() {
 		JPanel userPanel = new JPanel();
-		JLabel userLabel = new JLabel("User:");
+		JLabel userLabel = new JLabel("U¿ytkownik:");
 		userValueLabel = new JLabel();
 
 		userPanel.add(userLabel);
 		userPanel.add(userValueLabel);
 		return userPanel;
 	}
+	
+	private JPanel createSummaryPanel() {
+		JPanel summaryPanel = new JPanel();
+		JLabel summaryLabel = new JLabel("£¹czna kwota:");
+		summaryValueLabel = new JLabel();
+
+		summaryPanel.add(summaryLabel);
+		summaryPanel.add(summaryValueLabel);
+		return summaryPanel;
+	}
 
 	private JTable createItemsCartPanel() {
 		cartTableModel = new CartTableModel(cartItems);
 		JTable table = new JTable(cartTableModel);
 		return table;
+	}
+	
+	private void refreshSummary() {
+		int sum = 0;
+		for(Item item : cartItems) {
+			sum += item.getPrice();
+		}
+		summaryValueLabel.setText(Integer.toString(sum));
 	}
 
 	private class CartTableModel extends AbstractTableModel {

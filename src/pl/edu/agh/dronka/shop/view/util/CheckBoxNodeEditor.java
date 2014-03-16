@@ -14,7 +14,8 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeCellEditor;
 import javax.swing.tree.TreePath;
 
-public class CheckBoxNodeEditor extends AbstractCellEditor implements TreeCellEditor {
+public class CheckBoxNodeEditor extends AbstractCellEditor implements
+		TreeCellEditor {
 
 	private static final long serialVersionUID = -5203296566889638895L;
 
@@ -31,7 +32,7 @@ public class CheckBoxNodeEditor extends AbstractCellEditor implements TreeCellEd
 	public Object getCellEditorValue() {
 		JCheckBox checkbox = renderer.getLeafRenderer();
 		CheckBoxNode checkBoxNode = new CheckBoxNode(checkbox.getText(),
-				checkbox.isSelected());
+				renderer.getNodeData(), checkbox.isSelected());
 		return checkBoxNode;
 	}
 
@@ -73,4 +74,5 @@ public class CheckBoxNodeEditor extends AbstractCellEditor implements TreeCellEd
 
 		return editor;
 	}
+
 }

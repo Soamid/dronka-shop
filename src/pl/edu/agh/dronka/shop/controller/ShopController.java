@@ -40,7 +40,17 @@ public class ShopController {
 
 	public void setModel(Shop shopModel) {
 		this.shopModel = shopModel;
-		shopView.getIndexPanel().setItems(shopModel.getItemsIndex());
+		refreshIndexView();
+		refreshCategoryView();
+	}
+
+	public void refreshIndexView() {
+		shopView.getIndexPanel().setIndex(shopModel.getItemsIndex());
+		shopView.getItemPanel().setIndex(shopModel.getItemsIndex());
+	}
+
+	public void refreshCategoryView() {
+		shopView.getCategoryPanel().setIndex(shopModel.getItemsIndex());
 	}
 
 	private void setCurrentUser(User user) {

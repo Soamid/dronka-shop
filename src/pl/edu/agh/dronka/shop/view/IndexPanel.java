@@ -23,8 +23,8 @@ public class IndexPanel extends JPanel {
 		createVisuals();
 	}
 
-	public void setItems(Index itemsIndex) {
-		itemsList.setListData(itemsIndex.getItems().toArray(new Item[0]));
+	public void setIndex(Index itemsIndex) {
+		itemsList.setListData(itemsIndex.getFilteredItems().toArray(new Item[0]));
 	}
 
 	private void createVisuals() {

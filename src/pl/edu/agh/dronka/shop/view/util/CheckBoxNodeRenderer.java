@@ -3,6 +3,8 @@ package pl.edu.agh.dronka.shop.view.util;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JCheckBox;
 import javax.swing.JTree;
@@ -12,36 +14,43 @@ import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeCellRenderer;
 
 public class CheckBoxNodeRenderer implements TreeCellRenderer {
-	  private JCheckBox leafRenderer = new JCheckBox();
+	private JCheckBox leafRenderer = new JCheckBox();
 
-	  private DefaultTreeCellRenderer nonLeafRenderer = new DefaultTreeCellRenderer();
+	private Object nodeData;
 
-	  Color selectionBorderColor, selectionForeground, selectionBackground,
-	      textForeground, textBackground;
+	private DefaultTreeCellRenderer nonLeafRenderer = new DefaultTreeCellRenderer();
 
-	  protected JCheckBox getLeafRenderer() {
-	    return leafRenderer;
-	  }
+	Color selectionBorderColor, selectionForeground, selectionBackground,
+			textForeground, textBackground;
 
-	  public CheckBoxNodeRenderer() {
-	    Font fontValue;
-	    fontValue = UIManager.getFont("Tree.font");
-	    if (fontValue != null) {
-	      leafRenderer.setFont(fontValue);
-	    }
-	    Boolean booleanValue = (Boolean) UIManager
-	        .get("Tree.drawsFocusBorderAroundIcon");
-	    leafRenderer.setFocusPainted((booleanValue != null)
-	        && (booleanValue.booleanValue()));
+	protected JCheckBox getLeafRenderer() {
+		return leafRenderer;
+	}
 
-	    selectionBorderColor = UIManager.getColor("Tree.selectionBorderColor");
-	    selectionForeground = UIManager.getColor("Tree.selectionForeground");
-	    selectionBackground = UIManager.getColor("Tree.selectionBackground");
-	    textForeground = UIManager.getColor("Tree.textForeground");
-	    textBackground = UIManager.getColor("Tree.textBackground");
-	  }
+	public CheckBoxNodeRenderer() {
+		Font fontValue;
+		fontValue = UIManager.getFont("Tree.font");
+		if (fontValue != null) {
+			leafRenderer.setFont(fontValue);
+		}
+		Boolean booleanValue = (Boolean) UIManager
+				.get("Tree.drawsFocusBorderAroundIcon");
+		leafRenderer.setFocusPainted((booleanValue != null)
+				&& (booleanValue.booleanValue()));
 
-	  public Component getTreeCellRendererComponent(JTree tree, Object value,
+		selectionBorderColor = UIManager.getColor("Tree.selectionBorderColor");
+		selectionForeground = UIManager.getColor("Tree.selectionForeground");
+		selectionBackground = UIManager.getColor("Tree.selectionBackground");
+		textForeground = UIManager.getColor("Tree.textForeground");
+		textBackground = UIManager.getColor("Tree.textBackground");
+
+	}
+
+	public Object getNodeData() {
+		return nodeData;
+	}
+
+	public Component getTreeCellRendererComponent(JTree tree, Object value,
 	      boolean selected, boolean expanded, boolean leaf, int row,
 	      boolean hasFocus) {
 
@@ -49,7 +58,8 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 	    if (leaf) {
 
 	      String stringValue = tree.convertValueToText(value, selected,
-	          expanded, leaf, row, false);
+	          expanded, leaf, row, false); 
+	      
 	      leafRenderer.setText(stringValue);
 	      leafRenderer.setSelected(false);
 
@@ -67,9 +77,16 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 	        Object userObject = ((DefaultMutableTreeNode) value)
 	            .getUserObject();
 	        if (userObject instanceof CheckBoxNode) {
-	          CheckBoxNode node = (CheckBoxNode) userObject;
+	          final CheckBoxNode node = (CheckBoxNode) userObject;
+	          nodeData = node.getData();
 	          leafRenderer.setText(node.getText());
 	          leafRenderer.setSelected(node.isSelected());
+	          leafRenderer.addActionListener(new ActionListener() {
+	  			@Override
+	  			public void actionPerformed(ActionEvent arg0) {
+	  				node.setSelected(leafRenderer.isSelected());
+	  			}
+	  		});
 	        }
 	      }
 	      returnValue = leafRenderer;
@@ -79,4 +96,4 @@ public class CheckBoxNodeRenderer implements TreeCellRenderer {
 	    }
 	    return returnValue;
 	  }
-	}
+}

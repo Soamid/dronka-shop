@@ -65,6 +65,14 @@ public class ShopFrame extends JFrame {
 		return indexPanel;
 	}
 	
+	public CategoryPanel getCategoryPanel() {
+		return categoryPanel;
+	}
+	
+	public ItemPanel getItemPanel() {
+		return itemPanel;
+	}
+	
 	private void createVisuals() {
 		
 		BorderLayout layout = new BorderLayout();
@@ -72,7 +80,7 @@ public class ShopFrame extends JFrame {
 		setLayout(layout);
 		
 		mainPanel = createMainPanel();
-		categoryPanel = new CategoryPanel();
+		categoryPanel = new CategoryPanel(shopController);
 		
 		add(categoryPanel, BorderLayout.LINE_START);
 		add(createCartPanel(), BorderLayout.PAGE_START);
@@ -85,7 +93,7 @@ public class ShopFrame extends JFrame {
 		JPanel cartPanel = new JPanel();
 		cartPanel.setLayout(new BorderLayout());
 		
-		JButton cartButton = new JButton("Cart");
+		JButton cartButton = new JButton("Koszyk");
 		cartPanel.add(cartButton, BorderLayout.LINE_END);
 		
 		cartButton.addActionListener(new ActionListener() {
