@@ -51,7 +51,7 @@ public class PropertiesPanel extends JPanel {
 			ActionListener actionListener) {
 
 		JCheckBox checkBox = new JCheckBox(propertyName);
-		checkBox.setSelected(true);
+		checkBox.setSelected(false);
 		checkBox.addActionListener(actionListener);
 
 		return checkBox;

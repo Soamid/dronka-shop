@@ -1,10 +1,13 @@
 package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 
@@ -26,19 +29,24 @@ public class ProductsPanel extends JPanel {
 	}
 
 	public void setItems(List<Item> items) {
-		
 		itemsList.setListData(items.toArray(new Item[0]));
-		propertiesPanel.fillProperties();
 	}
-	
+
+	public PropertiesPanel getPropertiesPanel() {
+		return propertiesPanel;
+	}
+
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 		itemsList = new JList<>();
 
 		propertiesPanel = new PropertiesPanel(shopController);
 
+		JPanel buttonsPanel = createButtonsPanel();
+
 		add(propertiesPanel, BorderLayout.LINE_START);
 		add(itemsList, BorderLayout.CENTER);
+		add(buttonsPanel, BorderLayout.PAGE_END);
 
 		itemsList.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent evt) {
@@ -49,5 +57,23 @@ public class ProductsPanel extends JPanel {
 				}
 			}
 		});
+	}
+
+	private JPanel createButtonsPanel() {
+		JPanel buttonsPanel = new JPanel();
+
+		JButton backButton = new JButton("Powrót");
+
+		buttonsPanel.add(backButton);
+
+		backButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				shopController.showCategories();
+			}
+		});
+
+		return buttonsPanel;
 	}
 }
