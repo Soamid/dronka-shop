@@ -4,14 +4,11 @@ import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 import pl.edu.agh.dronka.shop.model.Shop;
 import pl.edu.agh.dronka.shop.model.User;
-import pl.edu.agh.dronka.shop.view.ProductsPanel;
 import pl.edu.agh.dronka.shop.view.ShopFrame;
 
 public class ShopController {
 
 	private ShopFrame shopView;
-	
-	private ProductsPanel categoryView;
 
 	private Shop shopModel;
 
@@ -39,31 +36,28 @@ public class ShopController {
 	}
 
 	public void chooseItem(Item item) {
-		categoryView.displayItem(item);
+		shopView.displayItem(item);
 	}
 
 	public void addToCart(Item item) {
-		categoryView.getCartPanel().addItem(item);
+		shopView.getCartPanel().addItem(item);
 	}
 
 	public void goToIndex() {
-		categoryView.displayIndex();
+		shopView.displayIndex();
 	}
 
 	public void setShopView(ShopFrame shopFrame) {
 		this.shopView = shopFrame;
 	}
 	
-	public void setCategoryView(ProductsPanel categoryPanel) {
-		this.categoryView = categoryPanel;
-	}
 
 	public void setModel(Shop shopModel) {
 		this.shopModel = shopModel;
-		refreshIndexView();
 	}
 	
 	public void showProducts(Category category) {
+		setCurrentCategory(category);
 		shopView.displayProducts(category);
 		refreshIndexView();
 	}
@@ -73,13 +67,14 @@ public class ShopController {
 	}
 
 	public void refreshIndexView() {
-		categoryView.getItemPanel().setIndex(shopModel.getItemsIndex());
+		shopView.getProductsPanel().setItems(shopModel.getItemsIndex().getItems(getCurrentCategory()));
+		shopView.getItemPanel().setIndex(shopModel.getItemsIndex());
 	}
 
 	public void filterItems(Item itemSpecification) {
 		itemsFilter.setItemSpecification(itemSpecification);
 		Index itemsIndex = shopModel.getItemsIndex();
-		categoryView.getIndexPanel().setItems(
+		shopView.getProductsPanel().setItems(
 				itemsFilter.filterItems(itemsIndex
 						.getItems(getCurrentCategory())));
 
@@ -87,7 +82,7 @@ public class ShopController {
 
 	private void setCurrentUser(User user) {
 		currentUser = user;
-		categoryView.getCartPanel().setUser(user);
+		shopView.getCartPanel().setUser(user);
 	}
 
 }
