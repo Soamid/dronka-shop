@@ -53,8 +53,7 @@ public class ShopFrame extends JFrame {
 	public ShopFrame(ShopController shopController) {
 		
 		this.shopController = shopController;
-		shopController.setShopView(this);
-		
+		this.shopController.setShopView(this);
 		createVisuals();
 		
 		setTitle("Dronka Shop");
@@ -97,7 +96,6 @@ public class ShopFrame extends JFrame {
 		setLayout(layout);
 		
 		mainPanel = createMainPanel();
-		
 		add(createCartPanel(), BorderLayout.PAGE_START);
 		add(mainPanel, BorderLayout.CENTER);
 		
