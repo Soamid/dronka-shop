@@ -1,86 +1,133 @@
 package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.awt.CardLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Category;
-import pl.edu.agh.dronka.shop.model.Index;
-import pl.edu.agh.dronka.shop.view.util.CheckBoxNode;
-import pl.edu.agh.dronka.shop.view.util.CheckBoxNodeEditor;
-import pl.edu.agh.dronka.shop.view.util.CheckBoxNodeRenderer;
+import pl.edu.agh.dronka.shop.model.Item;
 
 public class CategoryPanel extends JPanel {
 
 	private static final long serialVersionUID = 717323868233576963L;
-	private JTree categoriesTree;
-	private Index itemsIndex;
+	
+	private static final String ITEM_PANEL = "Item Panel";
+	
+	private static final String INDEX_PANEL = "Index Panel";
+
+	private static final String CART_PANEL = "Cart Panel";
+	
+	
+	private CardLayout mainPanelLayout;
+
+	private JPanel mainPanel;
+
+	private PropertiesPanel propertiesPanel;
+
+	private ItemPanel itemPanel;
+
+	private IndexPanel indexPanel;
+
 	private ShopController shopController;
 
+	private CartPanel cartPanel;
+ 
 	public CategoryPanel(ShopController shopController) {
+		
 		this.shopController = shopController;
-	}
-
-	public void setIndex(Index itemsIndex) {
-		this.itemsIndex = itemsIndex;
-		removeAll();
+		shopController.setCategoryView(this);
+		
 		createVisuals();
+		
+
+	}
+	
+	public void displayItem(Item item) {
+		displayPanel(ITEM_PANEL);
+		itemPanel.setItem(item);
 	}
 
+	public void displayIndex() {
+		displayPanel(INDEX_PANEL);
+	}
+	
+	public CartPanel getCartPanel() {
+		return cartPanel;
+	}
+	
+	public IndexPanel getIndexPanel() {
+		return indexPanel;
+	}
+	
+	public PropertiesPanel getPropertiesPanel() {
+		return propertiesPanel;
+	}
+	
+	public ItemPanel getItemPanel() {
+		return itemPanel;
+	}
+	
 	private void createVisuals() {
-
-		setLayout(new BorderLayout());
-
-		categoriesTree = new JTree(getTreeData());
-
-		CheckBoxNodeRenderer renderer = new CheckBoxNodeRenderer();
-
-		categoriesTree.setCellRenderer(renderer);
-		categoriesTree.setCellEditor(new CheckBoxNodeEditor(categoriesTree));
-		categoriesTree.setEditable(true);
-
-		categoriesTree.addMouseListener(new MouseAdapter() {
-
+		
+		BorderLayout layout = new BorderLayout();
+		layout.setHgap(10);
+		setLayout(layout);
+		
+		mainPanel = createMainPanel();
+		propertiesPanel = new PropertiesPanel(shopController);
+		
+		add(propertiesPanel, BorderLayout.LINE_START);
+		add(createCartPanel(), BorderLayout.PAGE_START);
+		add(mainPanel, BorderLayout.CENTER);
+		
+		
+	}
+	
+	private JPanel createCartPanel() {
+		JPanel cartPanel = new JPanel();
+		cartPanel.setLayout(new BorderLayout());
+		
+		JButton cartButton = new JButton("Koszyk");
+		cartPanel.add(cartButton, BorderLayout.LINE_END);
+		
+		cartButton.addActionListener(new ActionListener() {
+			
 			@Override
-			public void mouseClicked(MouseEvent e) {
-				Set<Category> skippedCategories = new HashSet<>();
-				DefaultMutableTreeNode rootItem = (DefaultMutableTreeNode) categoriesTree
-						.getModel().getRoot();
-				for (int i = 0; i < rootItem.getChildCount(); i++) {
-					CheckBoxNode nodeModel = (CheckBoxNode) ((DefaultMutableTreeNode) rootItem
-							.getChildAt(i)).getUserObject();
-					if (!nodeModel.isSelected()) {
-						skippedCategories.add((Category) nodeModel.getData());
-					}
-				}
-
-				itemsIndex.setSkippedCategories(skippedCategories);
-				shopController.refreshIndexView();
+			public void actionPerformed(ActionEvent arg0) {
+				displayPanel(CART_PANEL);
 			}
 		});
-
-		add(categoriesTree, BorderLayout.CENTER);
-
+		
+		return cartPanel;
+		
+	}
+	
+	private JPanel createMainPanel() {
+		JPanel mainPanel = new JPanel();
+		mainPanelLayout = new CardLayout();
+		mainPanel.setLayout(mainPanelLayout);
+		
+		itemPanel = new ItemPanel(shopController);
+		indexPanel = new IndexPanel(shopController);
+		cartPanel = new CartPanel(shopController);
+		
+		mainPanel.add(itemPanel, ITEM_PANEL);
+		mainPanel.add(indexPanel, INDEX_PANEL);
+		mainPanel.add(cartPanel, CART_PANEL);
+		
+		mainPanelLayout.show(mainPanel, INDEX_PANEL);
+		
+		return mainPanel;
 	}
 
-	private Object[] getTreeData() {
-		List<CheckBoxNode> treeNodes = new ArrayList<>();
-		for (Category category : itemsIndex.getRegisteredCategories()) {
-			CheckBoxNode node = new CheckBoxNode(
-					itemsIndex.getCategoryName(category), category, true);
-			treeNodes.add(node);
-		}
-
-		return treeNodes.toArray();
+	
+	
+	private void displayPanel(String panelId) {
+		mainPanelLayout.show(mainPanel, panelId);
 	}
 
 }

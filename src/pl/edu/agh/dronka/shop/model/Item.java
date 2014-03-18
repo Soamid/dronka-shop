@@ -10,11 +10,18 @@ public class Item {
 	
 	private int quantity;
 	
+	private boolean secondhand;
+	
+	private boolean polish;
+	
 	public Item(String name, Category category, int price, int quantity) {
 		this.name = name;
 		this.category = category;
 		this.price = price;
 		this.quantity = quantity;
+	}
+
+	public Item() {
 	}
 
 	public String getName() {
@@ -31,6 +38,22 @@ public class Item {
 	
 	public int getQuantity() {
 		return quantity;
+	}
+	
+	public void setSecondhand(boolean secondhand) {
+		this.secondhand = secondhand;
+	}
+	
+	public boolean isSecondhand() {
+		return secondhand;
+	}
+	
+	public void setPolish(boolean polish) {
+		this.polish = polish;
+	}
+	
+	public boolean isPolish() {
+		return polish;
 	}
 	
 	@Override

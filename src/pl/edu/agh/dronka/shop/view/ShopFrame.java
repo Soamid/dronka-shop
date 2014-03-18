@@ -44,7 +44,7 @@ public class ShopFrame extends JFrame {
 	public ShopFrame(ShopController shopController) {
 		
 		this.shopController = shopController;
-		shopController.setShopView(this);
+		shopController.setCategoryView(this);
 		
 		createVisuals();
 		
