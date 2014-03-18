@@ -66,7 +66,10 @@ public class ShopController {
 	public void showProducts(Category category) {
 		shopView.displayProducts(category);
 		refreshIndexView();
-		
+	}
+	
+	public void showCategories() {
+		shopView.displayCategories();
 	}
 
 	public void refreshIndexView() {

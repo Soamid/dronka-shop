@@ -65,6 +65,12 @@ public class ShopFrame extends JFrame {
 		displayPanel(INDEX_PANEL);
 	}
 	
+	
+	public void displayCategories() {
+		displayPanel(CATEGORIES_PANEL);
+		
+	}
+	
 	public void displayProducts(Category category) {
 		displayPanel(PRODUCTS_PANEL);
 	}
@@ -152,7 +158,7 @@ public class ShopFrame extends JFrame {
 		mainPanel.add(categoriesPanel, CATEGORIES_PANEL);
 		mainPanel.add(productsPanel, PRODUCTS_PANEL);
 		// mainPanel.add(itemPanel, ITEM_PANEL);
-		// mainPanel.add(cartPanel, CART_PANEL);
+		mainPanel.add(cartPanel, CART_PANEL);
 		
 		mainPanelLayout.show(mainPanel, CATEGORIES_PANEL);
 		
@@ -164,6 +170,8 @@ public class ShopFrame extends JFrame {
 	private void displayPanel(String panelId) {
 		mainPanelLayout.show(mainPanel, panelId);
 	}
+
+	
 	
 	
 
