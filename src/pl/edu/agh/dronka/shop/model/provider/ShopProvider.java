@@ -60,4 +60,5 @@ public class ShopProvider {
 		index.registerCategory(Category.MUSIC, "Muzyka");
 		index.registerCategory(Category.SPORT, "Sport");
 	}
+
 }
