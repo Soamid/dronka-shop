@@ -12,8 +12,6 @@ public class ShopController {
 
 	private Shop shopModel;
 
-	private User currentUser;
-
 	private Category currentCategory;
 
 	private ItemsFilter itemsFilter = new ItemsFilter();
@@ -81,7 +79,6 @@ public class ShopController {
 	}
 
 	private void setCurrentUser(User user) {
-		currentUser = user;
 		shopView.getCartPanel().setUser(user);
 	}
 
