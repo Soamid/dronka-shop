@@ -150,7 +150,7 @@ public class ShopFrame extends JFrame {
 
 		mainPanel.add(categoriesPanel, CATEGORIES_PANEL);
 		mainPanel.add(productsPanel, PRODUCTS_PANEL);
-		// mainPanel.add(itemPanel, ITEM_PANEL);
+		mainPanel.add(itemPanel, ITEM_PANEL);
 		mainPanel.add(cartPanel, CART_PANEL);
 
 		mainPanelLayout.show(mainPanel, CATEGORIES_PANEL);
