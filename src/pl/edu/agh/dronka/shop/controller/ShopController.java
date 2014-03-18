@@ -4,14 +4,14 @@ import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 import pl.edu.agh.dronka.shop.model.Shop;
 import pl.edu.agh.dronka.shop.model.User;
-import pl.edu.agh.dronka.shop.view.CategoryPanel;
+import pl.edu.agh.dronka.shop.view.ProductsPanel;
 import pl.edu.agh.dronka.shop.view.ShopFrame;
 
 public class ShopController {
 
 	private ShopFrame shopView;
 	
-	private CategoryPanel categoryView;
+	private ProductsPanel categoryView;
 
 	private Shop shopModel;
 
@@ -54,7 +54,7 @@ public class ShopController {
 		this.shopView = shopFrame;
 	}
 	
-	public void setCategoryView(CategoryPanel categoryPanel) {
+	public void setCategoryView(ProductsPanel categoryPanel) {
 		this.categoryView = categoryPanel;
 	}
 

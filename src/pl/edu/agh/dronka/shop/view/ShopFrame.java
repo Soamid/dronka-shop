@@ -2,9 +2,6 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -18,7 +15,6 @@ import pl.edu.agh.dronka.shop.model.Category;
 import pl.edu.agh.dronka.shop.model.Item;
 
 public class ShopFrame extends JFrame {
-
 
 
 	private static final long serialVersionUID = 6578553391433363839L;
@@ -40,7 +36,7 @@ public class ShopFrame extends JFrame {
 
 	private CategoriesPanel categoriesPanel;
 	
-	private CategoryPanel categoryPanel;
+	private ProductsPanel productsPanel;
 
 	private ItemPanel itemPanel;
 
@@ -81,8 +77,8 @@ public class ShopFrame extends JFrame {
 		return indexPanel;
 	}
 	
-	public CategoryPanel getCategoryPanel() {
-		return categoryPanel;
+	public ProductsPanel getCategoryPanel() {
+		return productsPanel;
 	}
 	
 	public ItemPanel getItemPanel() {
@@ -121,26 +117,26 @@ public class ShopFrame extends JFrame {
 		
 	}
 
-	private JPanel createProductsPanel() {
-		JPanel productsPanel = new JPanel(new GridBagLayout());
-		
-		categoryPanel = new CategoryPanel(shopController);
-		GridBagConstraints c = new GridBagConstraints();
-		c.fill = GridBagConstraints.BOTH;
-		c.weightx = 0.5;
-		c.weighty = 0.5;
-		c.insets = new Insets(10, 0, 10, 10);
-		productsPanel.add(categoryPanel, c);
-		
-		
-		indexPanel = new IndexPanel(shopController);
-		c.gridwidth = 2;
-		c.insets = new Insets(10, 10, 10, 0);
-		productsPanel.add(indexPanel, c);
-		
-		return productsPanel;
-		
-	}
+//	private JPanel createProductsPanel() {
+//		JPanel productsPanel = new JPanel(new GridBagLayout());
+//		
+//		prodcutsPanel = new ProductsPanel(shopController);
+//		GridBagConstraints c = new GridBagConstraints();
+//		c.fill = GridBagConstraints.BOTH;
+//		c.weightx = 0.5;
+//		c.weighty = 0.5;
+//		c.insets = new Insets(10, 0, 10, 10);
+//		productsPanel.add(prodcutsPanel, c);
+//		
+//		
+//		indexPanel = new IndexPanel(shopController);
+//		c.gridwidth = 2;
+//		c.insets = new Insets(10, 10, 10, 0);
+//		productsPanel.add(indexPanel, c);
+//		
+//		return productsPanel;
+//		
+//	}
 	
 	private JPanel createMainPanel() {
 		JPanel mainPanel = new JPanel();
@@ -149,13 +145,14 @@ public class ShopFrame extends JFrame {
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
 		
 		categoriesPanel = new CategoriesPanel(shopController);
+		productsPanel = new ProductsPanel(shopController);
 		itemPanel = new ItemPanel(shopController);
 		cartPanel = new CartPanel(shopController);
 		
 		mainPanel.add(categoriesPanel, CATEGORIES_PANEL);
-		mainPanel.add(createProductsPanel(), PRODUCTS_PANEL);
-		mainPanel.add(itemPanel, ITEM_PANEL);
-		mainPanel.add(cartPanel, CART_PANEL);
+		mainPanel.add(productsPanel, PRODUCTS_PANEL);
+		// mainPanel.add(itemPanel, ITEM_PANEL);
+		// mainPanel.add(cartPanel, CART_PANEL);
 		
 		mainPanelLayout.show(mainPanel, CATEGORIES_PANEL);
 		
