@@ -78,7 +78,7 @@ public class CartPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				shopController.goToIndex();
+				shopController.showCategories();
 			}
 		});
 
