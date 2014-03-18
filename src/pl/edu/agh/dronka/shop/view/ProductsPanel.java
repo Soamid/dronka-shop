@@ -18,20 +18,26 @@ public class ProductsPanel extends JPanel {
 	private JList<Item> itemsList;
 	private ShopController shopController;
 
+	private PropertiesPanel propertiesPanel;
+
 	public ProductsPanel(ShopController shopController) {
 		this.shopController = shopController;
-	}
-
-	
-	public void setItems(List<Item> items) {
 		createVisuals();
-		itemsList.setListData(items.toArray(new Item[0]));
 	}
 
+	public void setItems(List<Item> items) {
+		
+		itemsList.setListData(items.toArray(new Item[0]));
+		propertiesPanel.fillProperties();
+	}
+	
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 		itemsList = new JList<>();
 
+		propertiesPanel = new PropertiesPanel(shopController);
+
+		add(propertiesPanel, BorderLayout.LINE_START);
 		add(itemsList, BorderLayout.CENTER);
 
 		itemsList.addMouseListener(new MouseAdapter() {

@@ -59,11 +59,11 @@ public class ShopController {
 	public void showProducts(Category category) {
 		setCurrentCategory(category);
 		shopView.displayProducts(category);
-		refreshIndexView();
+		refreshProductsView();
 		
 	}
 
-	public void refreshIndexView() {
+	public void refreshProductsView() {
 		shopView.getProductsPanel().setItems(shopModel.getItemsIndex().getItems(getCurrentCategory()));
 		shopView.getItemPanel().setIndex(shopModel.getItemsIndex());
 	}

@@ -38,8 +38,6 @@ public class ShopFrame extends JFrame {
 
 	private ItemPanel itemPanel;
 
-	private ProductsPanel indexPanel;
-
 	private ShopController shopController;
 
 	private CartPanel cartPanel;
