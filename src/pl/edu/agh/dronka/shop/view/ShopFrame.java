@@ -2,21 +2,30 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
+import pl.edu.agh.dronka.shop.model.Category;
 import pl.edu.agh.dronka.shop.model.Item;
 
 public class ShopFrame extends JFrame {
 
+
+
 	private static final long serialVersionUID = 6578553391433363839L;
 
 	private static final String CATEGORIES_PANEL = "Categories Panel";
+	
+	private static final String PRODUCTS_PANEL = "Products Panel";
 	
 	private static final String ITEM_PANEL = "Item Panel";
 	
@@ -61,6 +70,10 @@ public class ShopFrame extends JFrame {
 		displayPanel(INDEX_PANEL);
 	}
 	
+	public void displayProducts(Category category) {
+		displayPanel(PRODUCTS_PANEL);
+	}
+	
 	public CartPanel getCartPanel() {
 		return cartPanel;
 	}
@@ -85,10 +98,6 @@ public class ShopFrame extends JFrame {
 		
 		mainPanel = createMainPanel();
 		
-		
-		categoryPanel = new CategoryPanel(shopController);
-		
-		add(categoryPanel, BorderLayout.LINE_START);
 		add(createCartPanel(), BorderLayout.PAGE_START);
 		add(mainPanel, BorderLayout.CENTER);
 		
@@ -113,20 +122,41 @@ public class ShopFrame extends JFrame {
 		return cartPanel;
 		
 	}
+
+	private JPanel createProductsPanel() {
+		JPanel productsPanel = new JPanel(new GridBagLayout());
+		
+		categoryPanel = new CategoryPanel(shopController);
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.BOTH;
+		c.weightx = 0.5;
+		c.weighty = 0.5;
+		c.insets = new Insets(10, 0, 10, 10);
+		productsPanel.add(categoryPanel, c);
+		
+		
+		indexPanel = new IndexPanel(shopController);
+		c.gridwidth = 2;
+		c.insets = new Insets(10, 10, 10, 0);
+		productsPanel.add(indexPanel, c);
+		
+		return productsPanel;
+		
+	}
 	
 	private JPanel createMainPanel() {
 		JPanel mainPanel = new JPanel();
 		mainPanelLayout = new CardLayout();
 		mainPanel.setLayout(mainPanelLayout);
+		mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
 		
 		categoriesPanel = new CategoriesPanel(shopController);
 		itemPanel = new ItemPanel(shopController);
-		indexPanel = new IndexPanel(shopController);
 		cartPanel = new CartPanel(shopController);
 		
 		mainPanel.add(categoriesPanel, CATEGORIES_PANEL);
+		mainPanel.add(createProductsPanel(), PRODUCTS_PANEL);
 		mainPanel.add(itemPanel, ITEM_PANEL);
-		mainPanel.add(indexPanel, INDEX_PANEL);
 		mainPanel.add(cartPanel, CART_PANEL);
 		
 		mainPanelLayout.show(mainPanel, CATEGORIES_PANEL);

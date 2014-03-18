@@ -20,10 +20,10 @@ public class IndexPanel extends JPanel {
 
 	public IndexPanel(ShopController shopController) {
 		this.shopController = shopController;
-		createVisuals();
 	}
 
 	public void setIndex(Index itemsIndex) {
+		createVisuals();
 		itemsList.setListData(itemsIndex.getFilteredItems().toArray(new Item[0]));
 	}
 

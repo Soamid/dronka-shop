@@ -2,6 +2,8 @@ package pl.edu.agh.dronka.shop.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,6 +18,8 @@ import pl.edu.agh.dronka.shop.model.Category;
  */
 public class CategoriesPanel extends JPanel {
 
+	private static final long serialVersionUID = -5107029028540534486L;
+
 	private final ShopController shopController;
 
 	public CategoriesPanel(ShopController shopController) {
@@ -25,7 +29,7 @@ public class CategoriesPanel extends JPanel {
 
 	private void createVisuals() {
 		setLayout(new GridLayout(0, 1));
-		JLabel title = new JLabel("<HTML><FONT color=\"#000099\">Lista kategorii</FONT></HTML>");
+		JLabel title = new JLabel("<HTML><FONT size=6>Lista kategorii</FONT></HTML>");
 		add(title);
 		
 		for (Category category : Category.values()) {
@@ -34,7 +38,7 @@ public class CategoriesPanel extends JPanel {
 		}
 	}
 
-	private void addCategoryLink(Category category) {
+	private void addCategoryLink(final Category category) {
 		JButton button = new JButton();
 		button.setText("<HTML><FONT color=\"#000099\"><U>" + category.name() + "</U></FONT>" + 
 				"</HTML>");
@@ -42,7 +46,15 @@ public class CategoriesPanel extends JPanel {
 		button.setBorderPainted(false);
 		button.setOpaque(false);
 		button.setBackground(Color.WHITE);
-		//button.addActionListener();
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				shopController.showProducts(category);
+				
+			}
+			
+		});
 		add(button);
 	}
 }
