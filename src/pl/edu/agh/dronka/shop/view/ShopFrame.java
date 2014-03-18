@@ -16,6 +16,8 @@ public class ShopFrame extends JFrame {
 
 	private static final long serialVersionUID = 6578553391433363839L;
 
+	private static final String CATEGORIES_PANEL = "Categories Panel";
+	
 	private static final String ITEM_PANEL = "Item Panel";
 	
 	private static final String INDEX_PANEL = "Index Panel";
@@ -27,6 +29,8 @@ public class ShopFrame extends JFrame {
 
 	private JPanel mainPanel;
 
+	private CategoriesPanel categoriesPanel;
+	
 	private CategoryPanel categoryPanel;
 
 	private ItemPanel itemPanel;
@@ -80,6 +84,8 @@ public class ShopFrame extends JFrame {
 		setLayout(layout);
 		
 		mainPanel = createMainPanel();
+		
+		
 		categoryPanel = new CategoryPanel(shopController);
 		
 		add(categoryPanel, BorderLayout.LINE_START);
@@ -113,15 +119,17 @@ public class ShopFrame extends JFrame {
 		mainPanelLayout = new CardLayout();
 		mainPanel.setLayout(mainPanelLayout);
 		
+		categoriesPanel = new CategoriesPanel(shopController);
 		itemPanel = new ItemPanel(shopController);
 		indexPanel = new IndexPanel(shopController);
 		cartPanel = new CartPanel(shopController);
 		
+		mainPanel.add(categoriesPanel, CATEGORIES_PANEL);
 		mainPanel.add(itemPanel, ITEM_PANEL);
 		mainPanel.add(indexPanel, INDEX_PANEL);
 		mainPanel.add(cartPanel, CART_PANEL);
 		
-		mainPanelLayout.show(mainPanel, INDEX_PANEL);
+		mainPanelLayout.show(mainPanel, CATEGORIES_PANEL);
 		
 		return mainPanel;
 	}
@@ -131,5 +139,7 @@ public class ShopFrame extends JFrame {
 	private void displayPanel(String panelId) {
 		mainPanelLayout.show(mainPanel, panelId);
 	}
+	
+	
 
 }
