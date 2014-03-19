@@ -40,7 +40,7 @@ public class CategoriesPanel extends JPanel {
 
 	private void addCategoryLink(final Category category) {
 		JButton button = new JButton();
-		button.setText("<HTML><FONT color=\"#000099\"><U>" + category.name() + "</U></FONT>" + 
+		button.setText("<HTML><FONT color=\"#000099\"><U>" + category.getDisplayName().toUpperCase() + "</U></FONT>" + 
 				"</HTML>");
 		button.setHorizontalAlignment(SwingConstants.LEFT);
 		button.setBorderPainted(false);

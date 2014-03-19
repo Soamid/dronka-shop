@@ -2,6 +2,7 @@ package pl.edu.agh.dronka.shop.model;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -9,14 +10,14 @@ public class Index {
 
 	private List<Item> items = new ArrayList<>();
 
-	private Map<Category, String> categories = new LinkedHashMap<>();
+	private List<Category> categories = new LinkedList<>();
 
 	public void addItem(Item item) {
 		items.add(item);
 	}
 
-	public void registerCategory(Category category, String name) {
-		categories.put(category, name);
+	public void registerCategory(Category category) {
+		categories.add(category);
 	}
 
 	public List<Item> getItems() {
@@ -36,11 +37,8 @@ public class Index {
 	}
 
 	public List<Category> getRegisteredCategories() {
-		return new ArrayList<>(categories.keySet());
+		return categories;
 	}
 
-	public String getCategoryName(Category category) {
-		return categories.get(category);
-	}
 
 }

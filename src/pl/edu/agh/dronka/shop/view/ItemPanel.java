@@ -36,7 +36,7 @@ public class ItemPanel extends JPanel {
 		infoPanel.removeAll();
 		this.currentItem = item;
 		createInfoLabel("Nazwa", item.getName());
-		createInfoLabel("Kategoria", index.getCategoryName(item.getCategory()));
+		createInfoLabel("Kategoria", item.getCategory().getDisplayName()); 
 		createInfoLabel("Iloœæ", Integer.toString(item.getQuantity()));
 		addToCartButton.setEnabled(item.getQuantity() > 0);
 	}

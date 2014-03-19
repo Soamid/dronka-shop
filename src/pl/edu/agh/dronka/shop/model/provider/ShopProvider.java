@@ -80,11 +80,9 @@ public class ShopProvider {
 	}
 
 	public static void registerExampleCategories(Index index) {
-		index.registerCategory(Category.BOOKS, "Ksi¹¿ki");
-		index.registerCategory(Category.ELECTRONICS, "Elektronika");
-		index.registerCategory(Category.FOOD, "¯ywnoœæ");
-		index.registerCategory(Category.MUSIC, "Muzyka");
-		index.registerCategory(Category.SPORT, "Sport");
+		for (Category category : Category.values()) {
+			index.registerCategory(category);
+		}
 	}
 
 }
