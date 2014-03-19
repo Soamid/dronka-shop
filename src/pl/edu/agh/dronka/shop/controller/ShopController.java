@@ -67,7 +67,6 @@ public class ShopController {
 	public void refreshProductsView() {
 		shopView.getProductsPanel().setItems(shopModel.getItemsIndex().getItems(getCurrentCategory()));
 		shopView.getProductsPanel().getPropertiesPanel().fillProperties();
-		shopView.getItemPanel().setIndex(shopModel.getItemsIndex());
 	}
 
 	public void filterItems(Item itemSpecification) {

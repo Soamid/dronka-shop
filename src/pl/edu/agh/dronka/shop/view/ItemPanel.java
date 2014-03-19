@@ -11,7 +11,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 
 public class ItemPanel extends JPanel {
@@ -24,8 +23,6 @@ public class ItemPanel extends JPanel {
 	private Item currentItem;
 
 	private JButton addToCartButton;
-
-	private Index index;
 
 	public ItemPanel(ShopController shopController) {
 		this.shopController = shopController;
@@ -41,10 +38,6 @@ public class ItemPanel extends JPanel {
 		addToCartButton.setEnabled(item.getQuantity() > 0);
 	}
 	
-	public void setIndex(Index index) {
-		this.index = index;
-	}
-
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 
