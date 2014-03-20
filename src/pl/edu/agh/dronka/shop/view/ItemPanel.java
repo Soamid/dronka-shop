@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -12,6 +13,7 @@ import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.provider.PropertiesHelper;
 
 public class ItemPanel extends JPanel {
 
@@ -32,12 +34,18 @@ public class ItemPanel extends JPanel {
 	public void setItem(Item item) {
 		infoPanel.removeAll();
 		this.currentItem = item;
-		createInfoLabel("Nazwa", item.getName());
-		createInfoLabel("Kategoria", item.getCategory().getDisplayName()); 
-		createInfoLabel("Iloœæ", Integer.toString(item.getQuantity()));
+
+		Map<String, Object> propertiesMap = PropertiesHelper
+				.getPropertiesMap(item);
+
+		for (String displayName : propertiesMap.keySet()) {
+			createInfoLabel(displayName, propertiesMap.get(displayName)
+					.toString());
+		}
+
 		addToCartButton.setEnabled(item.getQuantity() > 0);
 	}
-	
+
 	private void createVisuals() {
 		setLayout(new BorderLayout());
 
