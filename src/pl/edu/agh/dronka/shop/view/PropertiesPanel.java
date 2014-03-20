@@ -8,6 +8,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
+import pl.edu.agh.dronka.shop.model.Category;
 import pl.edu.agh.dronka.shop.model.Item;
 
 public class PropertiesPanel extends JPanel {
@@ -25,25 +26,20 @@ public class PropertiesPanel extends JPanel {
 	public void fillProperties() {
 		removeAll();
 
-		add(createPropertyCheckbox("Tanie bo polskie", new ActionListener() {
+		Category category = shopController.getCurrentCategory();
 
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				itemSpecification.setPolish(((JCheckBox) event.getSource())
-						.isSelected());
-				shopController.filterItems(itemSpecification);
-			}
-		}));
+		for (final String propertyName : category.getCheckableProperties()) {
+			itemSpecification.setPropertyValue(propertyName, false);
+			add(createPropertyCheckbox(propertyName, new ActionListener() {
 
-		add(createPropertyCheckbox("U¿ywany", new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent event) {
-				itemSpecification.setSecondhand(((JCheckBox) event.getSource())
-						.isSelected());
-				shopController.filterItems(itemSpecification);
-			}
-		}));
+				@Override
+				public void actionPerformed(ActionEvent event) {
+					itemSpecification.setPropertyValue(propertyName,
+							((JCheckBox) event.getSource()).isSelected());
+					shopController.filterItems(itemSpecification);
+				}
+			}));
+		}
 
 	}
 

@@ -44,7 +44,7 @@ public class ProductsPanel extends JPanel {
 
 		JPanel buttonsPanel = createButtonsPanel();
 
-//		add(propertiesPanel, BorderLayout.LINE_START);
+		add(propertiesPanel, BorderLayout.LINE_START);
 		add(itemsList, BorderLayout.CENTER);
 		add(buttonsPanel, BorderLayout.PAGE_END);
 

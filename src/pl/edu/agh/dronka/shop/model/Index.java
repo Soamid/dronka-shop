@@ -17,6 +17,16 @@ public class Index {
 	public void registerCategory(Category category) {
 		categories.add(category);
 	}
+	
+	public Category getCategory(String name) {
+		for(Category category : categories) {
+			if(category.getDisplayName().equals(name)) {
+				return category;
+			}
+		}
+		
+		return null;
+	}
 
 	public List<Item> getItems() {
 		return new ArrayList<>(items);

@@ -26,8 +26,15 @@ public class ItemsFilter {
 	}
 
 	protected boolean isValidItem(Item item) {
-		return compareValues(itemSpec.isPolish(), item.isPolish())
-				&& compareValues(itemSpec.isSecondhand(), item.isSecondhand());
+		boolean result = true;
+
+		for (String propertyName : item.getCategory().getCheckableProperties()) {
+			result = result
+					&& compareValues(
+							(boolean) itemSpec.getPropertyValue(propertyName),
+							(boolean) item.getPropertyValue(propertyName));
+		}
+		return result;
 	}
 
 	private boolean compareValues(boolean specValue, boolean itemValue) {
