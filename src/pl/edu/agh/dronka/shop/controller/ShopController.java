@@ -1,4 +1,5 @@
 package pl.edu.agh.dronka.shop.controller;
+
 import pl.edu.agh.dronka.shop.model.Category;
 import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
@@ -48,24 +49,28 @@ public class ShopController {
 	public void setShopView(ShopFrame shopFrame) {
 		this.shopView = shopFrame;
 	}
-	
+
+	public Shop getModel() {
+		return shopModel;
+	}
 
 	public void setModel(Shop shopModel) {
 		this.shopModel = shopModel;
 	}
-	
+
 	public void showProducts(Category category) {
 		setCurrentCategory(category);
 		shopView.displayProducts(category);
 		refreshProductsView();
 	}
-	
+
 	public void showCategories() {
 		shopView.displayCategories();
 	}
 
 	public void refreshProductsView() {
-		shopView.getProductsPanel().setItems(shopModel.getItemsIndex().getItems(getCurrentCategory()));
+		shopView.getProductsPanel().setItems(
+				shopModel.getItemsIndex().getItems(getCurrentCategory()));
 		shopView.getProductsPanel().getPropertiesPanel().fillProperties();
 	}
 

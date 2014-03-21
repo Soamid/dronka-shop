@@ -32,7 +32,7 @@ public class CategoriesPanel extends JPanel {
 		JLabel title = new JLabel("<HTML><FONT size=6>Lista kategorii</FONT></HTML>");
 		add(title);
 		
-		for (Category category : Category.values()) {
+		for (Category category : shopController.getModel().getItemsIndex().getRegisteredCategories()) {
 			addCategoryLink(category);
 			
 		}

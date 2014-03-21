@@ -25,8 +25,8 @@ public class Main {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				ShopController shopController = new ShopController();
-				ShopFrame shopFrame = new ShopFrame(shopController);
 				shopController.setModel(ShopProvider.getExampleShop());
+				ShopFrame shopFrame = new ShopFrame(shopController);
 				shopController.logIn(ShopProvider.getExampleUser());
 				shopFrame
 						.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
