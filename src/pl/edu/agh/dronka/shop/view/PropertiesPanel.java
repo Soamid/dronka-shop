@@ -8,14 +8,14 @@ import javax.swing.JCheckBox;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
 
 public class PropertiesPanel extends JPanel {
 
 	private static final long serialVersionUID = -2804446079853846996L;
 	private ShopController shopController;
 
-	private Item itemSpecification = new Item();
+	private ItemFilter filter = new ItemFilter.Builder().build();
 
 	public PropertiesPanel(ShopController shopController) {
 		this.shopController = shopController;
@@ -29,9 +29,9 @@ public class PropertiesPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				itemSpecification.setPolish(((JCheckBox) event.getSource())
-						.isSelected());
-				shopController.filterItems(itemSpecification);
+				filter = new ItemFilter.Builder(filter).polish(((JCheckBox) event.getSource())
+						.isSelected()).build();
+				shopController.filterItems(filter);
 			}
 		}));
 
@@ -39,9 +39,9 @@ public class PropertiesPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				itemSpecification.setSecondhand(((JCheckBox) event.getSource())
-						.isSelected());
-				shopController.filterItems(itemSpecification);
+				filter = new ItemFilter.Builder(filter).secondHand(((JCheckBox) event.getSource())
+						.isSelected()).build();
+				shopController.filterItems(filter);
 			}
 		}));
 

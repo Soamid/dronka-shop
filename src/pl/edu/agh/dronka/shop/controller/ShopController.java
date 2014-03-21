@@ -5,6 +5,7 @@ import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 import pl.edu.agh.dronka.shop.model.Shop;
 import pl.edu.agh.dronka.shop.model.User;
+import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
 import pl.edu.agh.dronka.shop.view.ShopFrame;
 
 public class ShopController {
@@ -14,8 +15,6 @@ public class ShopController {
 	private Shop shopModel;
 
 	private Category currentCategory;
-
-	private ItemsFilter itemsFilter = new ItemsFilter();
 
 	public void logIn(User user) {
 		for (User shopUser : shopModel.getRegisteredUsers()) {
@@ -74,13 +73,10 @@ public class ShopController {
 		shopView.getProductsPanel().getPropertiesPanel().fillProperties();
 	}
 
-	public void filterItems(Item itemSpecification) {
-		itemsFilter.setItemSpecification(itemSpecification);
+	public void filterItems(ItemFilter filter) {
 		Index itemsIndex = shopModel.getItemsIndex();
-		shopView.getProductsPanel().setItems(
-				itemsFilter.filterItems(itemsIndex
-						.getItems(getCurrentCategory())));
-
+		shopView.getProductsPanel().setItems(itemsIndex.getItems(new ItemFilter.Builder(filter).category(getCurrentCategory()).build()));
+				
 	}
 
 	private void setCurrentUser(User user) {
