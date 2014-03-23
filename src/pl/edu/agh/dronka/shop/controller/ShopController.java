@@ -19,12 +19,17 @@ public class ShopController {
 	private User currentUser;
 
 	public void logIn(User user) {
-		for (User shopUser : shopModel.getRegisteredUsers()) {
+		for (User shopUser : shopModel.getUsers()) {
 			if (shopUser.getName().equals(user.getName())
 					&& shopUser.getSurname().equals(user.getSurname())) {
 				setCurrentUser(shopUser);
 			}
 		}
+	}
+
+	public void setCurrentUser(User user) {
+		currentUser = user;
+		shopView.getCartPanel().setUser(user);
 	}
 
 	public void setCurrentCategory(Category currentCategory) {
@@ -33,6 +38,18 @@ public class ShopController {
 
 	public Category getCurrentCategory() {
 		return currentCategory;
+	}
+	
+	public void setShopView(ShopFrame shopFrame) {
+		this.shopView = shopFrame;
+	}
+
+	public Shop getModel() {
+		return shopModel;
+	}
+
+	public void setModel(Shop shopModel) {
+		this.shopModel = shopModel;
 	}
 
 	public void chooseItem(Item item) {
@@ -46,18 +63,6 @@ public class ShopController {
 
 	public void goToIndex() {
 		shopView.displayIndex();
-	}
-
-	public void setShopView(ShopFrame shopFrame) {
-		this.shopView = shopFrame;
-	}
-
-	public Shop getModel() {
-		return shopModel;
-	}
-
-	public void setModel(Shop shopModel) {
-		this.shopModel = shopModel;
 	}
 
 	public void showProducts(Category category) {
@@ -78,13 +83,10 @@ public class ShopController {
 
 	public void filterItems(ItemFilter filter) {
 		Index itemsIndex = shopModel.getItemsIndex();
-		shopView.getProductsPanel().setItems(itemsIndex.getItems(new ItemFilter.Builder(filter).category(getCurrentCategory()).build()));
-				
-	}
+		shopView.getProductsPanel().setItems(
+				itemsIndex.getItems(new ItemFilter.Builder(filter).category(
+						getCurrentCategory()).build()));
 
-	private void setCurrentUser(User user) {
-		currentUser = user;
-		shopView.getCartPanel().setUser(user);
 	}
 
 }

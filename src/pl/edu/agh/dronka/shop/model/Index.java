@@ -29,6 +29,11 @@ public class Index {
 		
 		return null;
 	}
+	
+	public List<Category> getCategories() {
+		return categories;
+	}
+	
 
 	public List<Item> getItems() {
 		return new ArrayList<>(items);
@@ -46,12 +51,7 @@ public class Index {
 		return categoryItems;
 	}
 	
-	
 
-	public List<Category> getRegisteredCategories() {
-		return categories;
-	}
-	
 	public List<Item> getItems(ItemFilter filter) {
 		List<Item> result = new LinkedList<>();
 		

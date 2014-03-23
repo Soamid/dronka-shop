@@ -114,27 +114,6 @@ public class ShopFrame extends JFrame {
 
 	}
 
-	// private JPanel createProductsPanel() {
-	// JPanel productsPanel = new JPanel(new GridBagLayout());
-	//
-	// prodcutsPanel = new ProductsPanel(shopController);
-	// GridBagConstraints c = new GridBagConstraints();
-	// c.fill = GridBagConstraints.BOTH;
-	// c.weightx = 0.5;
-	// c.weighty = 0.5;
-	// c.insets = new Insets(10, 0, 10, 10);
-	// productsPanel.add(prodcutsPanel, c);
-	//
-	//
-	// indexPanel = new IndexPanel(shopController);
-	// c.gridwidth = 2;
-	// c.insets = new Insets(10, 10, 10, 0);
-	// productsPanel.add(indexPanel, c);
-	//
-	// return productsPanel;
-	//
-	// }
-
 	private JPanel createMainPanel() {
 		JPanel mainPanel = new JPanel();
 		mainPanelLayout = new CardLayout();
