@@ -13,6 +13,7 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
+import pl.edu.agh.dronka.shop.model.Cart;
 import pl.edu.agh.dronka.shop.model.Item;
 import pl.edu.agh.dronka.shop.model.User;
 
@@ -30,19 +31,23 @@ public class CartPanel extends JPanel {
 
 	private JLabel userValueLabel;
 
+	private Cart cartModel;
+
 	public CartPanel(ShopController shopController) {
 		this.shopController = shopController;
 		createVisuals();
 	}
 
 	public void setUser(User user) {
+		cartModel = user.getCart();
 		userValueLabel.setText(user.getName() + " " + user.getSurname());
 	}
-
-	public void addItem(Item item) {
-		cartItems.add(item);
+	
+	public void refresh() {
+		cartItems.clear();
+		cartItems.addAll(cartModel.getItems());
 		cartTableModel.fireTableDataChanged();
-		refreshSummary();
+		summaryValueLabel.setText(Integer.toString(cartModel.getTotalPrice()));
 	}
 
 
@@ -86,8 +91,8 @@ public class CartPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cartItems.clear();
-				cartTableModel.fireTableDataChanged();
+				cartModel.clearCart();
+				refresh();
 			}
 		});
 
@@ -120,13 +125,6 @@ public class CartPanel extends JPanel {
 		return table;
 	}
 	
-	private void refreshSummary() {
-		int sum = 0;
-		for(Item item : cartItems) {
-			sum += item.getPrice();
-		}
-		summaryValueLabel.setText(Integer.toString(sum));
-	}
 
 	private class CartTableModel extends AbstractTableModel {
 
@@ -168,4 +166,5 @@ public class CartPanel extends JPanel {
 
 	}
 
+	
 }

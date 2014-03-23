@@ -16,6 +16,8 @@ public class ShopController {
 
 	private Category currentCategory;
 
+	private User currentUser;
+
 	public void logIn(User user) {
 		for (User shopUser : shopModel.getRegisteredUsers()) {
 			if (shopUser.getName().equals(user.getName())
@@ -38,7 +40,8 @@ public class ShopController {
 	}
 
 	public void addToCart(Item item) {
-		shopView.getCartPanel().addItem(item);
+		currentUser.getCart().addItem(item);
+		shopView.getCartPanel().refresh();
 	}
 
 	public void goToIndex() {
@@ -80,6 +83,7 @@ public class ShopController {
 	}
 
 	private void setCurrentUser(User user) {
+		currentUser = user;
 		shopView.getCartPanel().setUser(user);
 	}
 
