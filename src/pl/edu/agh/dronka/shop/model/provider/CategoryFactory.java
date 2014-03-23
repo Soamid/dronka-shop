@@ -1,13 +1,14 @@
 package pl.edu.agh.dronka.shop.model.provider;
 
 import pl.edu.agh.dronka.shop.model.Category;
+import pl.edu.agh.dronka.shop.model.PropertyType;
 
 public class CategoryFactory {
 
 	public Category createBooksCategory() {
 		Category bookCategory = createBaseCategory("Ksi¹¿ki");
-		bookCategory.registerProperty("Liczba stron", false);
-		bookCategory.registerProperty("Twarda oprawa", true);
+		bookCategory.registerProperty("Liczba stron", PropertyType.INTEGER);
+		bookCategory.registerProperty("Twarda oprawa", PropertyType.BOOLEAN);
 
 		return bookCategory;
 
@@ -15,8 +16,8 @@ public class CategoryFactory {
 
 	public Category createElectronicsCategory() {
 		Category bookCategory = createBaseCategory("Elektronika");
-		bookCategory.registerProperty("Mobilny", true);
-		bookCategory.registerProperty("Gwarancja", true);
+		bookCategory.registerProperty("Mobilny", PropertyType.BOOLEAN);
+		bookCategory.registerProperty("Gwarancja", PropertyType.BOOLEAN);
 
 		return bookCategory;
 
@@ -39,9 +40,8 @@ public class CategoryFactory {
 
 	private Category createBaseCategory(String displayName) {
 		Category category = new Category(displayName);
-		category.registerProperty("Nazwa", false);
-		category.registerProperty("Tanie bo polskie", true);
-		category.registerProperty("U¿ywany", true);
+		category.registerProperty("Tanie bo polskie", PropertyType.BOOLEAN);
+		category.registerProperty("U¿ywany", PropertyType.BOOLEAN);
 
 		return category;
 	}

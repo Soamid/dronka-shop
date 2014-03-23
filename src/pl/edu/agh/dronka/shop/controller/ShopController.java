@@ -5,6 +5,7 @@ import pl.edu.agh.dronka.shop.model.Index;
 import pl.edu.agh.dronka.shop.model.Item;
 import pl.edu.agh.dronka.shop.model.Shop;
 import pl.edu.agh.dronka.shop.model.User;
+import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
 import pl.edu.agh.dronka.shop.view.ShopFrame;
 
 public class ShopController {
@@ -15,15 +16,20 @@ public class ShopController {
 
 	private Category currentCategory;
 
-	private ItemsFilter itemsFilter = new ItemsFilter();
+	private User currentUser;
 
 	public void logIn(User user) {
-		for (User shopUser : shopModel.getRegisteredUsers()) {
+		for (User shopUser : shopModel.getUsers()) {
 			if (shopUser.getName().equals(user.getName())
 					&& shopUser.getSurname().equals(user.getSurname())) {
 				setCurrentUser(shopUser);
 			}
 		}
+	}
+
+	public void setCurrentUser(User user) {
+		currentUser = user;
+		shopView.getCartPanel().setUser(user);
 	}
 
 	public void setCurrentCategory(Category currentCategory) {
@@ -32,18 +38,6 @@ public class ShopController {
 
 	public Category getCurrentCategory() {
 		return currentCategory;
-	}
-
-	public void chooseItem(Item item) {
-		shopView.displayItem(item);
-	}
-
-	public void addToCart(Item item) {
-		shopView.getCartPanel().addItem(item);
-	}
-
-	public void goToIndex() {
-		shopView.displayIndex();
 	}
 
 	public void setShopView(ShopFrame shopFrame) {
@@ -56,6 +50,19 @@ public class ShopController {
 
 	public void setModel(Shop shopModel) {
 		this.shopModel = shopModel;
+	}
+
+	public void chooseItem(Item item) {
+		shopView.displayItem(item);
+	}
+
+	public void addToCart(Item item) {
+		currentUser.getCart().addItem(item);
+		shopView.getCartPanel().refresh();
+	}
+
+	public void goToIndex() {
+		shopView.displayIndex();
 	}
 
 	public void showProducts(Category category) {
@@ -74,17 +81,10 @@ public class ShopController {
 		shopView.getProductsPanel().getPropertiesPanel().fillProperties();
 	}
 
-	public void filterItems(Item itemSpecification) {
-		itemsFilter.setItemSpecification(itemSpecification);
+	public void filterItems(ItemFilter filter) {
 		Index itemsIndex = shopModel.getItemsIndex();
-		shopView.getProductsPanel().setItems(
-				itemsFilter.filterItems(itemsIndex
-						.getItems(getCurrentCategory())));
+		shopView.getProductsPanel().setItems(itemsIndex.getItems(filter));
 
-	}
-
-	private void setCurrentUser(User user) {
-		shopView.getCartPanel().setUser(user);
 	}
 
 }

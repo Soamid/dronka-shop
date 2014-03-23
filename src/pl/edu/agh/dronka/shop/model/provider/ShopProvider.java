@@ -1,5 +1,6 @@
 package pl.edu.agh.dronka.shop.model.provider;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,77 +34,28 @@ public class ShopProvider {
 	}
 
 	public static List<Item> getExampleItems(Index itemsIndex) {
+
 		List<Item> items = new ArrayList<>();
 
 		Category booksCategory = itemsIndex.getCategory("Ksi¹¿ki");
+		CSVReader booksReader = new CSVReader("resources/books.csv");
+		items.addAll(readItems(booksReader, booksCategory));
+
 		Category electronicsCategory = itemsIndex.getCategory("Elektronika");
+		CSVReader electronicsReader = new CSVReader("resources/electronics.csv");
+		items.addAll(readItems(electronicsReader, electronicsCategory));
+
 		Category foodCategory = itemsIndex.getCategory("¯ywnoœæ");
+		CSVReader foodReader = new CSVReader("resources/food.csv");
+		items.addAll(readItems(foodReader, foodCategory));
+
 		Category musicCategory = itemsIndex.getCategory("Muzyka");
+		CSVReader musicReader = new CSVReader("resources/music.csv");
+		items.addAll(readItems(musicReader, musicCategory));
+
 		Category sportCategory = itemsIndex.getCategory("Sport");
-
-		Item item1 = new Item("Telewizor LCD El D¿i", electronicsCategory,
-				2000, 10);
-		item1.setPropertyValue("U¿ywany", true);
-		item1.setPropertyValue("Tanie bo polskie", false);
-		item1.setPropertyValue("Mobilny", false);
-		item1.setPropertyValue("Gwarancja", true);
-		items.add(item1);
-
-		Item item2 = new Item("Zupa Studencka Instant", foodCategory, 2, 100);
-		item2.setPropertyValue("U¿ywany", false);
-		item2.setPropertyValue("Tanie bo polskie", true);
-		items.add(item2);
-
-		Item item3 = new Item("Nowe Przygody Gangu Czworga", booksCategory, 50,
-				2);
-		item3.setPropertyValue("Tanie bo polskie", true);
-		item3.setPropertyValue("U¿ywany", true);
-		item3.setPropertyValue("Twarda oprawa", true);
-		item3.setPropertyValue("Liczba stron", 500);
-		items.add(item3);
-
-		Item item4 = new Item(
-				"Zamodeluj swoje ¿ycie. Technologie obiektowe for dummies",
-				booksCategory, 120, 15);
-		item4.setPropertyValue("U¿ywany", false);
-		item4.setPropertyValue("Tanie bo polskie", false);
-		item4.setPropertyValue("Twarda oprawa", false);
-		item4.setPropertyValue("Liczba stron", 200);
-		items.add(item4);
-
-		Item item5 = new Item(
-				"When The Smoke is Going Down : Testy wydajnoœciowe w praktyce",
-				booksCategory, 90, 3);
-		item5.setPropertyValue("U¿ywany", true);
-		item5.setPropertyValue("Tanie bo polskie", false);;
-		item5.setPropertyValue("Twarda oprawa", true);
-		item5.setPropertyValue("Liczba stron", 2000);
-		items.add(item5);
-
-		Item item6 = new Item("Ciley Myrus - Big Ball of Mud", musicCategory,
-				60, 20);
-		item6.setPropertyValue("U¿ywany", false);
-		item6.setPropertyValue("Tanie bo polskie", true);
-		items.add(item6);
-
-		Item item7 = new Item("Sznycel mro¿ony", foodCategory, 6, 30);
-		item7.setPropertyValue("U¿ywany", false);
-		item7.setPropertyValue("Tanie bo polskie", true);
-		items.add(item7);
-
-		Item item8 = new Item("Legendarny Bulbulator", electronicsCategory,
-				99999999, 1);
-		item8.setPropertyValue("U¿ywany", false);
-		item8.setPropertyValue("Tanie bo polskie", false);
-		item8.setPropertyValue("Mobilny", true);
-		item8.setPropertyValue("Gwarancja", false);
-		items.add(item8);
-
-		Item item9 = new Item("Narty b³otne (Hit sezonu!!!)", sportCategory,
-				1500, 14);
-		item9.setPropertyValue("U¿ywany", true);
-		item9.setPropertyValue("Tanie bo polskie", false);
-		items.add(item9);
+		CSVReader sportReader = new CSVReader("resources/sport.csv");
+		items.addAll(readItems(sportReader, sportCategory));
 
 		return items;
 	}
@@ -115,6 +67,48 @@ public class ShopProvider {
 		index.registerCategory(categoryFactory.createFoodCategory());
 		index.registerCategory(categoryFactory.createMusicCategory());
 		index.registerCategory(categoryFactory.createSportCategory());
+	}
+
+	private static List<Item> readItems(CSVReader reader, Category category) {
+		List<Item> items = new ArrayList<>();
+
+		try {
+			reader.parse();
+			List<String[]> data = reader.getData();
+
+			for (String[] dataLine : data) {
+				String name = reader.getValue(dataLine, "Nazwa");
+				int price = Integer.parseInt(reader.getValue(dataLine, "Cena"));
+				int quantity = Integer.parseInt(reader.getValue(dataLine,
+						"Iloœæ"));
+
+				Item item = new Item(name, category, price, quantity);
+
+				for (String property : category.getProperties()) {
+					String propertyText = reader.getValue(dataLine, property);
+					Object propertyValue;
+					switch (category.getPropertyType(property)) {
+					case BOOLEAN:
+						propertyValue = Boolean.parseBoolean(propertyText);
+						break;
+					case INTEGER:
+						propertyValue = Integer.parseInt(propertyText);
+						break;
+					default:
+						propertyValue = propertyText;
+					}
+					item.setPropertyValue(property, propertyValue);
+				}
+
+				items.add(item);
+
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return items;
 	}
 
 }

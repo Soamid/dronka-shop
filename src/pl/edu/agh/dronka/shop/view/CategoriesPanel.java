@@ -13,9 +13,7 @@ import javax.swing.SwingConstants;
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Category;
 
-/**
- * Shows list of categories available in the shop. *
- */
+
 public class CategoriesPanel extends JPanel {
 
 	private static final long serialVersionUID = -5107029028540534486L;
@@ -32,7 +30,7 @@ public class CategoriesPanel extends JPanel {
 		JLabel title = new JLabel("<HTML><FONT size=6>Lista kategorii</FONT></HTML>");
 		add(title);
 		
-		for (Category category : shopController.getModel().getItemsIndex().getRegisteredCategories()) {
+		for (Category category : shopController.getModel().getItemsIndex().getCategories()) {
 			addCategoryLink(category);
 			
 		}

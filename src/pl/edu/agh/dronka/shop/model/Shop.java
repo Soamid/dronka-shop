@@ -5,17 +5,17 @@ import java.util.List;
 
 public class Shop {
 
-	private List<User> registeredUsers = new ArrayList<>();
+	private List<User> users = new ArrayList<>();
 	
 	private Index itemsIndex;
 	
 	
 	public void addUser(User user) {
-		registeredUsers.add(user);
+		users.add(user);
 	}
 	
-	public List<User> getRegisteredUsers() {
-		return new ArrayList<>(registeredUsers);
+	public List<User> getUsers() {
+		return new ArrayList<>(users);
 	}
 	
 	public void setItemsIndex(Index itemsIndex) {

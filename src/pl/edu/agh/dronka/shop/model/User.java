@@ -6,10 +6,14 @@ public class User {
 	
 	private String surname;
 	
+	private Cart cart;
+	
 
 	public User(String name, String surname) {
 		this.name = name;
 		this.surname = surname;
+		
+		this.cart = new Cart();
 	}
 
 	public String getName() {
@@ -18,5 +22,9 @@ public class User {
 	
 	public String getSurname() {
 		return surname;
+	}
+	
+	public Cart getCart() {
+		return cart;
 	}
 }

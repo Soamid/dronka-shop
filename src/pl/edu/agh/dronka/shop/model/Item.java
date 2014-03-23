@@ -5,20 +5,24 @@ import java.util.Map;
 
 public class Item {
 
+	private String name;
+
+	private Category category;
+
+	private int price;
+
+	private int quantity;
 
 	private Map<String, Object> propertyValues = new HashMap<>();
 
-
-
 	public Item(String name, Category category, int price, int quantity) {
-		setPropertyValue("Nazwa", name);
-		setPropertyValue("Kategoria", category);
-		setPropertyValue("Cena", price);
-		setPropertyValue("Iloœæ", quantity);
+		this.name = name;
+		this.category = category;
+		this.price = price;
+		this.quantity = quantity;
 	}
 
 	public void setPropertyValue(String propertyName, Object propertyValue) {
-		// TODO walidacja czy jest property istnieje w kategorii
 		propertyValues.put(propertyName, propertyValue);
 	}
 
@@ -29,20 +33,28 @@ public class Item {
 	public Item() {
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getName() {
-		return (String) getPropertyValue("Nazwa");
+		return name;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	public Category getCategory() {
-		return (Category) getPropertyValue("Kategoria");
+		return category;
 	}
 
 	public int getPrice() {
-		return (int) getPropertyValue("Cena");
+		return price;
 	}
 
 	public int getQuantity() {
-		return (int) getPropertyValue("Iloœæ");
+		return quantity;
 	}
 
 	@Override

@@ -9,14 +9,15 @@ import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Category;
-import pl.edu.agh.dronka.shop.model.Item;
+import pl.edu.agh.dronka.shop.model.PropertyType;
+import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
 
 public class PropertiesPanel extends JPanel {
 
 	private static final long serialVersionUID = -2804446079853846996L;
 	private ShopController shopController;
 
-	private Item itemSpecification = new Item();
+	private ItemFilter itemFilter = new ItemFilter();
 
 	public PropertiesPanel(ShopController shopController) {
 		this.shopController = shopController;
@@ -27,16 +28,18 @@ public class PropertiesPanel extends JPanel {
 		removeAll();
 
 		Category category = shopController.getCurrentCategory();
+		itemFilter.getItemSpec().setCategory(category);
 
-		for (final String propertyName : category.getCheckableProperties()) {
-			itemSpecification.setPropertyValue(propertyName, false);
+		for (final String propertyName : category
+				.getProperties(PropertyType.BOOLEAN)) {
+			itemFilter.getItemSpec().setPropertyValue(propertyName, false);
 			add(createPropertyCheckbox(propertyName, new ActionListener() {
 
 				@Override
 				public void actionPerformed(ActionEvent event) {
-					itemSpecification.setPropertyValue(propertyName,
+					itemFilter.getItemSpec().setPropertyValue(propertyName,
 							((JCheckBox) event.getSource()).isSelected());
-					shopController.filterItems(itemSpecification);
+					shopController.filterItems(itemFilter);
 				}
 			}));
 		}

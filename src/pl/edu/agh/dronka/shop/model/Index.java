@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
+import pl.edu.agh.dronka.shop.model.filter.ItemFilter;
+
 public class Index {
 
 	private List<Item> items = new ArrayList<>();
@@ -27,6 +29,11 @@ public class Index {
 		
 		return null;
 	}
+	
+	public List<Category> getCategories() {
+		return categories;
+	}
+	
 
 	public List<Item> getItems() {
 		return new ArrayList<>(items);
@@ -43,10 +50,23 @@ public class Index {
 
 		return categoryItems;
 	}
+	
 
-	public List<Category> getRegisteredCategories() {
-		return categories;
+	public List<Item> getItems(ItemFilter filter) {
+		List<Item> result = new LinkedList<>();
+		
+		for (Item item : items) {
+			if (filter.appliesTo(item)) {
+				result.add(item);
+			}
+				
+		}
+		
+		return result;
 	}
+	
+	
+	
 
 
 }
