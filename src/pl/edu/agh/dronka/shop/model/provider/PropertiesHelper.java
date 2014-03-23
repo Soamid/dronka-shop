@@ -11,6 +11,7 @@ public class PropertiesHelper {
 		Map<String, Object> propertiesMap = new LinkedHashMap<>();
 		
 		propertiesMap.put("Nazwa", item.getName());
+		propertiesMap.put("Cena", item.getPrice());
 		propertiesMap.put("Kategoria", item.getCategory().getDisplayName()); 
 		propertiesMap.put("Iloœæ", Integer.toString(item.getQuantity()));
 		propertiesMap.put("Tanie bo polskie", item.isPolish());
