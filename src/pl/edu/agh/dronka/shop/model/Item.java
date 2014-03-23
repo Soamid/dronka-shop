@@ -44,6 +44,10 @@ public class Item {
 		return price;
 	}
 
+	public int getDiscountPrice() {
+		return (int) (price - price * (category.getDiscount() / 100.0));
+	}
+
 	public int getQuantity() {
 		return quantity;
 	}
