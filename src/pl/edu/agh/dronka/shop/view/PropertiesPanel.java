@@ -15,7 +15,7 @@ public class PropertiesPanel extends JPanel {
 	private static final long serialVersionUID = -2804446079853846996L;
 	private ShopController shopController;
 
-	private ItemFilter filter = new ItemFilter.Builder().build();
+	private ItemFilter filter = new ItemFilter();
 
 	public PropertiesPanel(ShopController shopController) {
 		this.shopController = shopController;
@@ -25,12 +25,13 @@ public class PropertiesPanel extends JPanel {
 	public void fillProperties() {
 		removeAll();
 
+		filter.getItemSpec().setCategory(shopController.getCurrentCategory());
 		add(createPropertyCheckbox("Tanie bo polskie", new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				filter = new ItemFilter.Builder(filter).polish(((JCheckBox) event.getSource())
-						.isSelected()).build();
+				filter.getItemSpec().setPolish(
+						((JCheckBox) event.getSource()).isSelected());
 				shopController.filterItems(filter);
 			}
 		}));
@@ -39,8 +40,8 @@ public class PropertiesPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
-				filter = new ItemFilter.Builder(filter).secondHand(((JCheckBox) event.getSource())
-						.isSelected()).build();
+				filter.getItemSpec().setSecondhand(
+						((JCheckBox) event.getSource()).isSelected());
 				shopController.filterItems(filter);
 			}
 		}));

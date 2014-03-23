@@ -39,7 +39,7 @@ public class ShopController {
 	public Category getCurrentCategory() {
 		return currentCategory;
 	}
-	
+
 	public void setShopView(ShopFrame shopFrame) {
 		this.shopView = shopFrame;
 	}
@@ -83,9 +83,7 @@ public class ShopController {
 
 	public void filterItems(ItemFilter filter) {
 		Index itemsIndex = shopModel.getItemsIndex();
-		shopView.getProductsPanel().setItems(
-				itemsIndex.getItems(new ItemFilter.Builder(filter).category(
-						getCurrentCategory()).build()));
+		shopView.getProductsPanel().setItems(itemsIndex.getItems(filter));
 
 	}
 
