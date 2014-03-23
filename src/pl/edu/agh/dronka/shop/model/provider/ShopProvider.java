@@ -58,6 +58,9 @@ public class ShopProvider {
 		for (Category category : Category.values()) {
 			index.registerCategory(category);
 		}
+		
+		index.addDiscount(Category.ELECTRONICS, 20);
+		index.addDiscount(Category.MUSIC, 5);
 	}
 
 	private static List<Item> readItems(CSVReader reader, Category category) {
