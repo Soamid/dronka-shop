@@ -65,25 +65,25 @@ public class ShopController {
 		shopView.displayIndex();
 	}
 
-	public void showProducts(Category category) {
+	public void showItems(Category category) {
 		setCurrentCategory(category);
-		shopView.displayProducts(category);
-		refreshProductsView();
+		shopView.displayItems(category);
+		refreshItemsView();
 	}
 
 	public void showCategories() {
 		shopView.displayCategories();
 	}
 
-	public void refreshProductsView() {
-		shopView.getProductsPanel().setItems(
+	public void refreshItemsView() {
+		shopView.getItemsPanel().setItems(
 				shopModel.getItemsIndex().getItems(getCurrentCategory()));
-		shopView.getProductsPanel().getPropertiesPanel().fillProperties();
+		shopView.getItemsPanel().getPropertiesPanel().fillProperties();
 	}
 
 	public void filterItems(ItemFilter filter) {
 		Index itemsIndex = shopModel.getItemsIndex();
-		shopView.getProductsPanel().setItems(itemsIndex.getItems(filter));
+		shopView.getItemsPanel().setItems(itemsIndex.getItems(filter));
 
 	}
 

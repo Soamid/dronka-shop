@@ -13,9 +13,9 @@ import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Item;
-import pl.edu.agh.dronka.shop.model.provider.PropertiesHelper;
+import pl.edu.agh.dronka.shop.model.util.PropertiesHelper;
 
-public class ItemPanel extends JPanel {
+public class ItemDetailsPanel extends JPanel {
 
 	private static final long serialVersionUID = 7620300297634323349L;
 
@@ -26,7 +26,7 @@ public class ItemPanel extends JPanel {
 
 	private JButton addToCartButton;
 
-	public ItemPanel(ShopController shopController) {
+	public ItemDetailsPanel(ShopController shopController) {
 		this.shopController = shopController;
 		createVisuals();
 	}
@@ -71,7 +71,7 @@ public class ItemPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				shopController.showProducts(shopController.getCurrentCategory());
+				shopController.showItems(shopController.getCurrentCategory());
 			}
 		});
 

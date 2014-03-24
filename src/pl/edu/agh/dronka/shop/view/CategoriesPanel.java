@@ -48,7 +48,7 @@ public class CategoriesPanel extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				shopController.showProducts(category);
+				shopController.showItems(category);
 				
 			}
 			

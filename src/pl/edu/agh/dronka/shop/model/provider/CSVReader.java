@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 public class CSVReader {
 
@@ -19,10 +18,6 @@ public class CSVReader {
 
 	public CSVReader(String filename) {
 		this.filename = filename;
-	}
-
-	public Set<String> getHeader() {
-		return header.keySet();
 	}
 
 	public List<String[]> getData() {

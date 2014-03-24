@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import pl.edu.agh.dronka.shop.controller.ShopController;
 import pl.edu.agh.dronka.shop.model.Item;
 
-public class ProductsPanel extends JPanel {
+public class ItemsPanel extends JPanel {
 
 	private static final long serialVersionUID = -4871875393346906351L;
 
@@ -23,7 +23,7 @@ public class ProductsPanel extends JPanel {
 
 	private PropertiesPanel propertiesPanel;
 
-	public ProductsPanel(ShopController shopController) {
+	public ItemsPanel(ShopController shopController) {
 		this.shopController = shopController;
 		createVisuals();
 	}
