@@ -1,4 +1,4 @@
-package pl.edu.agh.dronka.shop.model.provider;
+package pl.edu.agh.dronka.shop.model.util;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

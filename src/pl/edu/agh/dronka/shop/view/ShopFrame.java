@@ -22,9 +22,9 @@ public class ShopFrame extends JFrame {
 
 	private static final String CATEGORIES_PANEL = "Categories Panel";
 
-	private static final String PRODUCTS_PANEL = "Products Panel";
+	private static final String ITEMS_PANEL = "Items Panel";
 
-	private static final String ITEM_PANEL = "Item Panel";
+	private static final String ITEM_DETAILS_PANEL = "Item Details Panel";
 
 	private static final String INDEX_PANEL = "Index Panel";
 
@@ -36,9 +36,9 @@ public class ShopFrame extends JFrame {
 
 	private CategoriesPanel categoriesPanel;
 
-	private ProductsPanel productsPanel;
+	private ItemsPanel itemsPanel;
 
-	private ItemPanel itemPanel;
+	private ItemDetailsPanel itemDetailsPanel;
 
 	private ShopController shopController;
 
@@ -55,8 +55,8 @@ public class ShopFrame extends JFrame {
 	}
 
 	public void displayItem(Item item) {
-		displayPanel(ITEM_PANEL);
-		itemPanel.setItem(item);
+		displayPanel(ITEM_DETAILS_PANEL);
+		itemDetailsPanel.setItem(item);
 	}
 
 	public void displayIndex() {
@@ -69,20 +69,20 @@ public class ShopFrame extends JFrame {
 		
 	}
 	
-	public void displayProducts(Category category) {
-		displayPanel(PRODUCTS_PANEL);
+	public void displayItems(Category category) {
+		displayPanel(ITEMS_PANEL);
 	}
 
 	public CartPanel getCartPanel() {
 		return cartPanel;
 	}
 
-	public ProductsPanel getProductsPanel() {
-		return productsPanel;
+	public ItemsPanel getItemsPanel() {
+		return itemsPanel;
 	}
 
-	public ItemPanel getItemPanel() {
-		return itemPanel;
+	public ItemDetailsPanel getItemDetailsPanel() {
+		return itemDetailsPanel;
 	}
 
 	private void createVisuals() {
@@ -129,13 +129,13 @@ public class ShopFrame extends JFrame {
 		mainPanel.setBorder(BorderFactory.createEmptyBorder(0, 30, 10, 30));
 
 		categoriesPanel = new CategoriesPanel(shopController);
-		productsPanel = new ProductsPanel(shopController);
-		itemPanel = new ItemPanel(shopController);
+		itemsPanel = new ItemsPanel(shopController);
+		itemDetailsPanel = new ItemDetailsPanel(shopController);
 		cartPanel = new CartPanel(shopController);
 
 		mainPanel.add(categoriesPanel, CATEGORIES_PANEL);
-		mainPanel.add(productsPanel, PRODUCTS_PANEL);
-		mainPanel.add(itemPanel, ITEM_PANEL);
+		mainPanel.add(itemsPanel, ITEMS_PANEL);
+		mainPanel.add(itemDetailsPanel, ITEM_DETAILS_PANEL);
 		mainPanel.add(cartPanel, CART_PANEL);
 
 		mainPanelLayout.show(mainPanel, CATEGORIES_PANEL);
