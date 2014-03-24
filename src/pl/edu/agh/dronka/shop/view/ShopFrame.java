@@ -6,8 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import pl.edu.agh.dronka.shop.controller.ShopController;
@@ -49,7 +51,7 @@ public class ShopFrame extends JFrame {
 		createVisuals();
 
 		setTitle("Dronka Shop");
-		setSize(700, 300);
+		setSize(700, 500);
 	}
 
 	public void displayItem(Item item) {
@@ -98,9 +100,15 @@ public class ShopFrame extends JFrame {
 	private JPanel createCartPanel() {
 		JPanel cartPanel = new JPanel();
 		cartPanel.setLayout(new BorderLayout());
-
+		
+		JLabel logoLabel = new JLabel(new ImageIcon("resources/images/dronka_logo.jpeg"));
+		cartPanel.add(logoLabel, BorderLayout.LINE_START);
+		
+		JPanel cartButtonPanel = new JPanel();
 		JButton cartButton = new JButton("Koszyk");
-		cartPanel.add(cartButton, BorderLayout.LINE_END);
+		cartButtonPanel.add(cartButton);
+		
+		cartPanel.add(cartButtonPanel, BorderLayout.LINE_END);
 
 		cartButton.addActionListener(new ActionListener() {
 

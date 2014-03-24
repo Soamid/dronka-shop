@@ -1,5 +1,6 @@
 package pl.edu.agh.dronka.shop.main;
 
+import javax.swing.ImageIcon;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.WindowConstants;
@@ -30,6 +31,8 @@ public class Main {
 				shopController.logIn(ShopProvider.getExampleUser());
 				shopFrame
 						.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+				
+				shopFrame.setIconImage(new ImageIcon("resources/images/dronka.jpeg").getImage());
 				shopFrame.setVisible(true);
 			}
 		});
