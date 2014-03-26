@@ -1,8 +1,9 @@
 package pl.edu.agh.dronka.shop.model.provider;
 
 import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,7 +33,8 @@ public class CSVReader {
 	}
 
 	public void parse() throws IOException {
-		try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+		try (BufferedReader br = new BufferedReader(new InputStreamReader(
+				new FileInputStream(filename), "UTF8"))) {
 
 			String line;
 			while ((line = br.readLine()) != null) {
@@ -40,6 +42,8 @@ public class CSVReader {
 			}
 
 		}
+		
+		
 
 		String[] headerLine = data.remove(0);
 

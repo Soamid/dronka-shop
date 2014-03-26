@@ -36,7 +36,7 @@ public class PropertiesPanel extends JPanel {
 			}
 		}));
 
-		add(createPropertyCheckbox("U¿ywany", new ActionListener() {
+		add(createPropertyCheckbox("UÅ¼ywany", new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {

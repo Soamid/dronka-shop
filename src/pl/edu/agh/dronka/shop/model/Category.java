@@ -2,7 +2,7 @@ package pl.edu.agh.dronka.shop.model;
 
 public enum Category {
 
-	BOOKS("Ksi¹¿ki"), ELECTRONICS("Elektronika"), FOOD("¯ywnoœæ"), MUSIC("Muzyka"), SPORT("Sport");
+	BOOKS("KsiÄ…Å¼ki"), ELECTRONICS("Elektronika"), FOOD("Å»ywnoÅ›Ä‡"), MUSIC("Muzyka"), SPORT("Sport");
 
 	private String displayName;
 
