@@ -73,7 +73,7 @@ public class CartPanel extends JPanel {
 	private JPanel createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 
-		JButton backButton = new JButton("PowrÛt");
+		JButton backButton = new JButton("Powr√≥t");
 		JButton buyButton = new JButton("Kup!");
 
 		buttonsPanel.add(backButton);
@@ -101,7 +101,7 @@ public class CartPanel extends JPanel {
 
 	private JPanel createUserPanel() {
 		JPanel userPanel = new JPanel();
-		JLabel userLabel = new JLabel("Uøytkownik:");
+		JLabel userLabel = new JLabel("U≈ºytkownik:");
 		userValueLabel = new JLabel();
 
 		userPanel.add(userLabel);
@@ -111,7 +111,7 @@ public class CartPanel extends JPanel {
 	
 	private JPanel createSummaryPanel() {
 		JPanel summaryPanel = new JPanel();
-		JLabel summaryLabel = new JLabel("£πczna kwota:");
+		JLabel summaryLabel = new JLabel("≈ÅƒÖczna kwota:");
 		summaryValueLabel = new JLabel();
 
 		summaryPanel.add(summaryLabel);
@@ -139,9 +139,9 @@ public class CartPanel extends JPanel {
 		@Override
 		public String getColumnName(int column) {
 			if (column == 0) {
-				return "Item";
+				return "Produkt";
 			}
-			return "Price";
+			return "Cena";
 
 		}
 

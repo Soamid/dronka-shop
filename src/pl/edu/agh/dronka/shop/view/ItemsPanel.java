@@ -62,7 +62,7 @@ public class ItemsPanel extends JPanel {
 	private JPanel createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 
-		JButton backButton = new JButton("Powrót");
+		JButton backButton = new JButton("PowrÃ³t");
 
 		buttonsPanel.add(backButton);
 

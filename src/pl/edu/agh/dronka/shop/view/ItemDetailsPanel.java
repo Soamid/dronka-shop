@@ -61,7 +61,7 @@ public class ItemDetailsPanel extends JPanel {
 	private Component createButtonsPanel() {
 		JPanel buttonsPanel = new JPanel();
 
-		JButton backButton = new JButton("Powrót");
+		JButton backButton = new JButton("PowrÃ³t");
 		addToCartButton = new JButton("Dodaj do koszyka");
 
 		buttonsPanel.add(backButton);

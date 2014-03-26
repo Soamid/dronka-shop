@@ -37,7 +37,7 @@ public class ShopProvider {
 
 		List<Item> items = new ArrayList<>();
 
-		Category booksCategory = itemsIndex.getCategory("Ksi¹¿ki");
+		Category booksCategory = itemsIndex.getCategory("KsiÄ…Å¼ki");
 		CSVReader booksReader = new CSVReader("resources/books.csv");
 		items.addAll(readItems(booksReader, booksCategory));
 
@@ -45,7 +45,7 @@ public class ShopProvider {
 		CSVReader electronicsReader = new CSVReader("resources/electronics.csv");
 		items.addAll(readItems(electronicsReader, electronicsCategory));
 
-		Category foodCategory = itemsIndex.getCategory("¯ywnoœæ");
+		Category foodCategory = itemsIndex.getCategory("Å»ywnoÅ›Ä‡");
 		CSVReader foodReader = new CSVReader("resources/food.csv");
 		items.addAll(readItems(foodReader, foodCategory));
 
@@ -80,7 +80,7 @@ public class ShopProvider {
 				String name = reader.getValue(dataLine, "Nazwa");
 				int price = Integer.parseInt(reader.getValue(dataLine, "Cena"));
 				int quantity = Integer.parseInt(reader.getValue(dataLine,
-						"Iloœæ"));
+						"IloÅ›Ä‡"));
 
 				Item item = new Item(name, category, price, quantity);
 

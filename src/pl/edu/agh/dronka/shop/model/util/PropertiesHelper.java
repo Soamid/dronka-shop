@@ -13,7 +13,7 @@ public class PropertiesHelper {
 		propertiesMap.put("Nazwa", item.getName());
 		propertiesMap.put("Cena", item.getPrice());
 		propertiesMap.put("Kategoria", item.getCategory().getDisplayName());
-		propertiesMap.put("Iloœæ", Integer.toString(item.getQuantity()));
+		propertiesMap.put("IloÅ›Ä‡", Integer.toString(item.getQuantity()));
 		
 		for (String displayName : item.getCategory().getProperties()) {
 			propertiesMap.put(displayName, item.getPropertyValue(displayName)
