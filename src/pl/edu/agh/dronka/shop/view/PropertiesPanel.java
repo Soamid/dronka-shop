@@ -26,7 +26,7 @@ public class PropertiesPanel extends JPanel {
 		removeAll();
 
 		filter.getItemSpec().setCategory(shopController.getCurrentCategory());
-		add(createPropertyCheckbox("Tanie bo polskie", new ActionListener() {
+		add(createPropertyCheckbox("Polish", new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {
@@ -36,7 +36,7 @@ public class PropertiesPanel extends JPanel {
 			}
 		}));
 
-		add(createPropertyCheckbox("Używany", new ActionListener() {
+		add(createPropertyCheckbox("Secondhand", new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent event) {

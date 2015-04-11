@@ -105,7 +105,7 @@ public class ShopFrame extends JFrame {
 		cartPanel.add(logoLabel, BorderLayout.LINE_START);
 		
 		JPanel cartButtonPanel = new JPanel();
-		JButton cartButton = new JButton("Koszyk");
+		JButton cartButton = new JButton("Cart");
 		cartButtonPanel.add(cartButton);
 		
 		cartPanel.add(cartButtonPanel, BorderLayout.LINE_END);

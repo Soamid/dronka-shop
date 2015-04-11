@@ -10,12 +10,12 @@ public class PropertiesHelper {
 	public static Map<String, Object> getPropertiesMap(Item item) {
 		Map<String, Object> propertiesMap = new LinkedHashMap<>();
 		
-		propertiesMap.put("Nazwa", item.getName());
-		propertiesMap.put("Cena", item.getPrice());
-		propertiesMap.put("Kategoria", item.getCategory().getDisplayName()); 
-		propertiesMap.put("Ilość", Integer.toString(item.getQuantity()));
-		propertiesMap.put("Tanie bo polskie", item.isPolish());
-		propertiesMap.put("Używany", item.isSecondhand());
+		propertiesMap.put("Name", item.getName());
+		propertiesMap.put("Price", item.getPrice());
+		propertiesMap.put("Category", item.getCategory().getDisplayName()); 
+		propertiesMap.put("Quantity", Integer.toString(item.getQuantity()));
+		propertiesMap.put("Polish", item.isPolish());
+		propertiesMap.put("Secondhand", item.isSecondhand());
 		
 		return propertiesMap;
 	}

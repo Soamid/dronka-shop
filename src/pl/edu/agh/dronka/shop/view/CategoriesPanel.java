@@ -27,7 +27,7 @@ public class CategoriesPanel extends JPanel {
 
 	private void createVisuals() {
 		setLayout(new GridLayout(0, 1));
-		JLabel title = new JLabel("<HTML><FONT size=6>Lista kategorii</FONT></HTML>");
+		JLabel title = new JLabel("<HTML><FONT size=6>Categories</FONT></HTML>");
 		add(title);
 		
 		for (Category category : shopController.getModel().getItemsIndex().getCategories()) {

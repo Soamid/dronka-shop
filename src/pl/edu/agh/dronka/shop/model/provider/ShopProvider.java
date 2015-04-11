@@ -69,15 +69,15 @@ public class ShopProvider {
 
 			for (String[] dataLine : data) {
 	
-				String name = reader.getValue(dataLine,"Nazwa");
-				int price = Integer.parseInt(reader.getValue(dataLine, "Cena"));
+				String name = reader.getValue(dataLine,"Name");
+				int price = Integer.parseInt(reader.getValue(dataLine, "Price"));
 				int quantity = Integer.parseInt(reader.getValue(dataLine,
-						"Ilość"));
+						"Quantity"));
 
 				boolean isPolish = Boolean.parseBoolean(reader.getValue(
-						dataLine, "Tanie bo polskie"));
+						dataLine, "Polish"));
 				boolean isSecondhand = Boolean.parseBoolean(reader.getValue(
-						dataLine, "Używany"));
+						dataLine, "Secondhand"));
 				Item item = new Item(name, category, price, quantity);
 				item.setPolish(isPolish);
 				item.setSecondhand(isSecondhand);

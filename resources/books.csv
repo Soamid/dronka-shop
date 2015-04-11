@@ -1,4 +1,4 @@
-Nazwa,Cena,Ilość,Tanie bo polskie,Używany,Liczba stron,Twarda oprawa
-Nowe Przygody Gangu Czworga,50,2,TRUE,TRUE,500,TRUE
-Zamodeluj swoje życie. Technologie obiektowe for dummies,120,15,FALSE,FALSE,200,FALSE
-When The Smoke is Going Down : Wprowadzenie do testów wydajnościowych,90,3,TRUE,FALSE,2000,TRUE
+Name,Price,Quantity,Polish,Secondhand,Number of pages,Hardback
+The adventures of the Gang of Four,50,2,TRUE,TRUE,500,TRUE
+Create the model of your life. Object-oriented technology for dummies,120,15,FALSE,FALSE,200,FALSE
+When The Smoke is Going Down : Introduction to performance testing,90,3,TRUE,FALSE,2000,TRUE
